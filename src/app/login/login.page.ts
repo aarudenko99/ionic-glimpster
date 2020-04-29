@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl} from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
+import { AllService } from '../all.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +17,10 @@ export class LoginPage implements OnInit {
   passwordShown: boolean = false;
 
   constructor(
-    public loadingCtrl: LoadingController
+    public allService: AllService,
+    public loadingCtrl: LoadingController,
+    public router: Router,
+    public storage: Storage
   ) { }
 
   ngOnInit() {
@@ -30,6 +36,16 @@ export class LoginPage implements OnInit {
     });
   }
   doLogin(loginData){
+    // console.log('loginData----', loginData);
+
+    this.allService.doLogin(loginData).subscribe(data=>{
+      console.log('data', data);
+    },(err)=>{
+      // this.dismissLoading();
+      console.log(err);
+      console.log("Error = ",err.error);
+      // this.errorMsg = 'User name or password invalid';
+    })
 
     // this.showLoader();
 
