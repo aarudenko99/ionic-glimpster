@@ -1,0 +1,32 @@
+<ion-header>
+  <img src="assets/imgs/top_image.png" class="top_image">
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" class="wrap">
+          <p>A one time password is sent on your Email.</p>
+          <p>Please check .</p>
+        </ion-col>
+        <ion-col size="12" class="wrap">
+          <ion-item>
+            <ion-input type="text" placeholder="4 digits"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" class="wrap">
+          <ion-button type="submit" class="verify_btn">SIGN UP</ion-button>
+        </ion-col>
+        <ion-col size="12" class="wrap">
+          <p>Didn't get code yet? <span routerLink="/login">Resend OTP</span></p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
