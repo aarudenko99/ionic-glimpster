@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private router: Router
+    private router: Router,
+    private storage: Storage,
   ) {
     this.initializeApp();
   }
@@ -24,6 +26,19 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
+
+      this.storage.get('user').then(userInfo => {
+        if (userInfo) {
+          // this.events.publish('userCheck:created', userInfo);
+          this.router.navigate(['/tabs']);
+          // this.router.navigate(['/newuserabout']);
+        } else {
+          // this.events.publish('userCheck:created', 'userNotLogin');
+          // this.router.navigate(['/newuserabout']);
+          this.router.navigate(['/landing']);
+        }
+      });
+
       this.splashScreen.hide();
 
       this.router.navigate(['/landing']);

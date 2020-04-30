@@ -19,11 +19,11 @@
                 </ion-col>
                 <ion-col size="12">
                     <ion-item>
-                        <ion-input type="text" formControlName="username"></ion-input>
+                        <ion-input type="text" formControlName="email"></ion-input>
                     </ion-item>
 
                     <ng-container>
-                        <p class="errp" *ngIf="loginForm.get('username').hasError('required') && (loginForm.get('username').dirty || loginForm.get('username').touched)">
+                        <p class="errp" *ngIf="loginForm.get('email').hasError('required') && (loginForm.get('email').dirty || loginForm.get('email').touched)">
                             <ion-icon class="erricon" name="information-circle-outline"></ion-icon>This fields is required
                         </p>
                     </ng-container>

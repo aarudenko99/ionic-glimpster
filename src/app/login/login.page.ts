@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      'username': new FormControl('', Validators.compose([
+      'email': new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
@@ -36,10 +36,14 @@ export class LoginPage implements OnInit {
     });
   }
   doLogin(loginData){
-    // console.log('loginData----', loginData);
+    const body = new FormData();
+    body.append('email', loginData.email);
+    body.append('password', loginData.password);
 
-    this.allService.doLogin(loginData).subscribe(data=>{
+    this.allService.doLogin(body).subscribe(data=>{
       console.log('data', data);
+      this.storage.set('user', data);
+      this.router.navigate(['/tabs']);
     },(err)=>{
       // this.dismissLoading();
       console.log(err);

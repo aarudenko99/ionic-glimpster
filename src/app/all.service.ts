@@ -16,12 +16,13 @@ export class AllService {
     public alertCtrl: AlertController,
   ) { }
   
-  // logindata = {
+  //logindata = {
   //   username: "test@test.com",
   //   password: "123123"
   // }
   doLogin(logindata) {
-    return this.http.post(Url+'Api/login?', logindata).pipe(
+    console.log(logindata)
+    return this.http.post(Url+'Api/login', logindata).pipe(
       map(data => {
         return data;
       })
