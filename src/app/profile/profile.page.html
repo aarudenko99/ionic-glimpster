@@ -1,10 +1,67 @@
 <ion-header>
+  <img src="assets/imgs/top_image.png" class="top_image">
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+      <ion-buttons slot="start">
+        <ion-title>Profile</ion-title>
+          <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- DoLogout() -->
-  <ion-button (click)="doLogout()" class="verify_btn">LOG OUT</ion-button>
+  <form>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <div class="userimage">
+            <!-- <img [src]="userImage" (click)="selectImage('userimage')" class="inner_img"> -->
+            <img src="assets/imgs/profile/avatar.png"/>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-input type="text" placeholder="User name"></ion-input>
+          </ion-item>
+        </ion-col>
+        
+        <ion-col size="12">
+          <ion-item>
+            <ion-input type="number" placeholder="Mobile Number"></ion-input>
+          </ion-item>
+        </ion-col>
+        
+        <ion-col size="12">
+          <ion-item>
+            
+          </ion-item>
+        </ion-col>
+        
+        <ion-col size="12">
+          <ion-item>
+            <span>Change Password</span>
+          </ion-item>
+        </ion-col>
+        
+        <ion-col size="12">
+          <ion-item>
+            <span>Switch To Verified Account</span>
+          </ion-item>
+        </ion-col>
+        
+        <ion-col size="12">
+          <ion-item>
+            <span>Switch To sponsored Account</span>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-button class="logout">UPDATE PROFILE</ion-button>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button (click)="doLogout()" class="logout">LOGOUT</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>

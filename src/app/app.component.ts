@@ -28,13 +28,13 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.router.navigate(['/tabs']);
 
-      this.storage.get('user').then(userInfo => {
-        if (userInfo) {
-          this.router.navigate(['/tabs']);
-        } else {
-          this.router.navigate(['/landing']);
-        }
-      });
+      // this.storage.get('user').then(userInfo => {
+      //   if (userInfo) {
+      //     this.router.navigate(['/tabs']);
+      //   } else {
+      //     this.router.navigate(['/landing']);
+      //   }
+      // });
 
       this.splashScreen.hide();
 
