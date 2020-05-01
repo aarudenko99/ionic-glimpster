@@ -1,0 +1,89 @@
+<ion-header>
+  <img src="assets/imgs/top_image.png" class="top_image">
+  <ion-toolbar>
+    <ion-title>Me</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <div class="userimage">
+          <img [src]="userImage" (click)="selectImage('userimage')" class="inner_img">
+        </div>
+        
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-header>
+            <img src="assets/imgs/profile/business_card.png" class="card_images">
+          </ion-card-header>
+        
+          <ion-card-content>
+            <p>Business Card</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-header>
+            <img src="assets/imgs/profile/profile.png" class="card_images">
+          </ion-card-header>
+        
+          <ion-card-content>
+            <p>My Profiles</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      
+      <ion-col size="4">
+        <ion-card  [routerLink]="['/profile']">
+          <ion-card-header>
+            <img src="assets/imgs/profile/setting.png" class="card_images">
+          </ion-card-header>
+        
+          <ion-card-content>
+            <p>Settings</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-header>
+            <img src="assets/imgs/profile/contest.png" class="card_images">
+          </ion-card-header>
+        
+          <ion-card-content>
+            <p>Contests</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-header>
+            <img src="assets/imgs/profile/coupon.png" class="card_images">
+          </ion-card-header>
+        
+          <ion-card-content>
+            <p>Coupons</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-header>
+            <img src="assets/imgs/profile/gift.png" class="card_images">
+          </ion-card-header>
+        
+          <ion-card-content>
+            <p>Gifts</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

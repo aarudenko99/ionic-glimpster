@@ -26,22 +26,19 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
+      this.router.navigate(['/tabs']);
 
       this.storage.get('user').then(userInfo => {
         if (userInfo) {
-          // this.events.publish('userCheck:created', userInfo);
           this.router.navigate(['/tabs']);
-          // this.router.navigate(['/newuserabout']);
         } else {
-          // this.events.publish('userCheck:created', 'userNotLogin');
-          // this.router.navigate(['/newuserabout']);
           this.router.navigate(['/landing']);
         }
       });
 
       this.splashScreen.hide();
 
-      this.router.navigate(['/landing']);
+      // this.router.navigate(['/landing']);
     });
   }
 }

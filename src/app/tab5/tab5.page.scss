@@ -1,0 +1,29 @@
+ion-header {
+  .top_image {
+      background-image: url('../../assets/imgs/top_image.png');
+      position: absolute;
+  }
+  ion-toolbar {
+      --background: transparent !important;
+  }
+  ion-title {
+    margin-top: 10px;
+  }
+}
+
+ion-content {
+  ion-grid {
+    margin-top: 80px;
+    .userimage {
+      text-align: center;
+    }
+  }
+  .card_images {
+    width: 70px;
+    height: 57px;
+  }
+  ion-card {
+    width: 100px;
+    margin: 0 !important;
+  }
+}
