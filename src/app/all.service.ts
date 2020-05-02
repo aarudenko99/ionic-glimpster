@@ -21,8 +21,24 @@ export class AllService {
   //   password: "123123"
   // }
   doLogin(logindata) {
-    console.log(logindata)
     return this.http.post(Url+'Api/login', logindata).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+  
+  doSignup(target_email) {
+    // console.log(logindata)
+    return this.http.post(Url+'Api/email_otp', target_email).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
+  verify(register_data) { 
+    return this.http.post(Url+'Api/register_user', register_data).pipe(
       map(data => {
         return data;
       })

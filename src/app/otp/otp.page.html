@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <form>
+  <form (ngSubmit)="verify()">
     <ion-grid>
       <ion-row>
         <ion-col size="12" class="wrap">
@@ -17,14 +17,14 @@
         </ion-col>
         <ion-col size="12" class="wrap">
           <ion-item>
-            <ion-input type="text" placeholder="4 digits"></ion-input>
+            <ion-input type="text" placeholder="4 digits" [(ngModel)]="input_otp.title" name="title"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="12" class="wrap">
-          <ion-button type="submit" class="verify_btn">SIGN UP</ion-button>
+          <ion-button type="submit" class="verify_btn">VERIFY</ion-button>
         </ion-col>
         <ion-col size="12" class="wrap">
-          <p>Didn't get code yet? <span routerLink="/login">Resend OTP</span></p>
+          <p>Didn't get code yet? <span (click)="resendOTP()">Resend OTP</span></p>
         </ion-col>
       </ion-row>
     </ion-grid>

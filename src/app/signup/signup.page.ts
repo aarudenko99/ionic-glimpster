@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl} from '@angular/forms';
+import { Router, NavigationExtras } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { AllService } from '../all.service';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +20,8 @@ export class SignupPage implements OnInit {
   constructor(
     public loadingCtrl: LoadingController,
     public toastController: ToastController,
-    public router: Router
+    public router: Router,
+    public allService: AllService
   ) { 
     
   }
@@ -58,14 +60,46 @@ export class SignupPage implements OnInit {
   }
 
   doSignup(signupData) {
+    const body = new FormData();
+    body.append('email', signupData.email);
+    // body.append('password', loginData.password);
+    this.showLoader();
     if(signupData.password != signupData.confirmpassword) {
       this.presentToast("Passwords don't match");
       signupData.password = '';
       signupData.confirmpassword = '';
       return;
     }
-    console.log("signupData------", signupData);
-    this.router.navigate(['/otp']);
+    this.allService.doSignup(body).subscribe(
+      data => {
+        console.log(data);
+        this.dismissLoading();
+        if(data['success'] == 1) {
+          let navigationExtras: NavigationExtras = {
+            queryParams: {
+              email: signupData.email,
+              username: signupData.username,
+              firstname: signupData.firstname,
+              lastname: signupData.lastname,
+              mobilenummber: signupData.mobilenummber,
+              birthday: signupData.birthday,
+              password: signupData.password,
+              otp: data['otp']
+            }
+          };
+          this.signupForm.reset();
+          this.router.navigate(['/otp'], navigationExtras);
+        }
+        else {
+          this.presentToast(data['message']);
+        }
+      },
+      err => {
+        this.dismissLoading();
+      }
+    )
+    // console.log("signupData------", signupData);
+    // this.router.navigate(['/otp']);
   }
   togglePassword(){
     if(this.passwordShown) {

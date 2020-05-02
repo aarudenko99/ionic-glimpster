@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl} from '@angular/forms';
-import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+
+import { LoadingController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { AllService } from '../all.service';
 
@@ -20,7 +22,8 @@ export class LoginPage implements OnInit {
     public allService: AllService,
     public loadingCtrl: LoadingController,
     public router: Router,
-    public storage: Storage
+    public storage: Storage,
+    public toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -39,11 +42,20 @@ export class LoginPage implements OnInit {
     const body = new FormData();
     body.append('email', loginData.email);
     body.append('password', loginData.password);
+    this.showLoader();
 
     this.allService.doLogin(body).subscribe(data=>{
       console.log('data', data);
-      this.storage.set('user', data);
-      this.router.navigate(['/tabs']);
+      if(data['success'] == 1) {
+        this.storage.set('user', data);
+        this.dismissLoading();
+        this.router.navigate(['/tabs']);
+      }
+      else {
+        this.presentToast("Email or password incorrect");
+        this.dismissLoading();
+        return;
+      }
     },(err)=>{
       // this.dismissLoading();
       console.log(err);
@@ -97,6 +109,15 @@ export class LoginPage implements OnInit {
 
   async dismissLoading() {
     await this.loading.dismiss();
+  }
+
+  async presentToast(text) {
+    const toast = await this.toastController.create({
+      message: text,
+      position: 'bottom',
+      duration: 3000
+    });
+    toast.present();
   }
 
 }
