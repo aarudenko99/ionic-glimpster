@@ -44,4 +44,20 @@ export class AllService {
       })
     )
   }
+
+  requestPassword(request_email) {
+    return this.http.post(Url+'Api/check_email', request_email).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
+  forgorPassword(new_data) {
+    return this.http.post(Url+'Api/forgot_password', new_data).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
 }

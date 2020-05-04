@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { LoadingController } from '@ionic/angular';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { AllService } from '../all.service';
 
