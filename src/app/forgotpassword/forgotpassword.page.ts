@@ -48,13 +48,13 @@ export class ForgotpasswordPage implements OnInit {
   }
 
   requestPassword(passwordData) {
-    console.log(passwordData);
+    // console.log(passwordData);
     this.showLoader();
     const body = new FormData();
     body.append('email', passwordData.email);
 
     this.allService.requestPassword(body).subscribe(data=>{
-      console.log('data', data);
+      // console.log('data', data);
       if(data) {
         data['id']
         const body1 = new FormData();

@@ -1,0 +1,79 @@
+ion-header {
+  // display: flex;
+  background-image: url('../../assets/imgs/top_image.png');
+  height: 100px;
+  margin-bottom: 150px;
+  ion-toolbar {
+      --background: transparent !important;
+  }
+  ion-icon {
+    width: 70px;
+    height: 50px;
+    padding: 1% 0;
+    margin: 0 10px 0 10px;
+  }
+  .world {
+    color: #00dddd;
+  }
+  .icon_wrap {
+    display: flex;
+    margin-top: 40px;
+  }
+  searchbar-input {
+    border-radius: 50px !important;
+    background-color: white !important;
+  }
+  .activeContest {
+    height: 150px;
+    background: #DDDDDD;
+    padding: 10px;
+  }
+  .viewAll {
+    float: right;
+  }
+}
+
+ion-content {
+  .user_info {
+    display: flex;
+    align-items: center;
+    .username, .postdate {
+      margin-bottom: 10px;
+    }
+    .avatar {
+      width: 100px;
+    }
+    .wrap_icon {
+      ion-icon {
+        font-size: 40px;    
+      }
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  .postimage {
+    width: 100%;
+  }
+
+  .iconwrap{
+    display: flex;
+    justify-content: space-around;
+    div {
+      font-size: 25px;
+    }
+  }
+
+  .sendwrap {
+    display: flex;
+    border: 1px solid;
+    border-radius: 50px;
+    margin: 0 auto;
+    padding: 0;
+    ion-icon {
+      font-size: 25px;
+      color: #F9942C;
+      margin: 5px 5px 0 0;
+    }
+  }
+}
