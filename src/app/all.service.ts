@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { AlertController, LoadingController } from '@ionic/angular';
 
 let Url = 'http://glimpsters.betaplanets.com/MobileApp/';
+let imageBaseUrl = 'http://glimpsters.betaplanets.com/MobileApp/uploads/';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,11 @@ export class AllService {
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
   ) { }
-  
-  //logindata = {
-  //   username: "test@test.com",
-  //   password: "123123"
-  // }
+
+  getImageBaseUrl() {
+    return imageBaseUrl;
+  }
+
   doLogin(logindata) {
     return this.http.post(Url+'Api/login', logindata).pipe(
       map(data => {
@@ -29,7 +30,6 @@ export class AllService {
   }
   
   doSignup(target_email) {
-    // console.log(logindata)
     return this.http.post(Url+'Api/email_otp', target_email).pipe(
       map(data => {
         return data;
@@ -55,6 +55,14 @@ export class AllService {
 
   forgorPassword(new_data) {
     return this.http.post(Url+'Api/forgot_password', new_data).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
+  getAllContest() {
+    return this.http.get(Url+'Contest/get_all_contest').pipe(
       map(data => {
         return data;
       })
