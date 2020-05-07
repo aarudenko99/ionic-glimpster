@@ -32,7 +32,7 @@ export class AllContestsPage implements OnInit {
       this.imageBaseUrl = this.router.getCurrentNavigation().extras.state.imageBaseUrl;
       this.pastContest = this.router.getCurrentNavigation().extras.state.pastContest;
       this.upcomingContest = this.router.getCurrentNavigation().extras.state.upcomingContest;
+      // console.log(this.upcomingContest);
     });
-
   }
 }

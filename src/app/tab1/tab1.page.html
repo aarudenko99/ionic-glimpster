@@ -8,7 +8,7 @@
     <ion-col size="12" class="activeContest">
       <span>Contests</span>
       <span class="viewAll" (click)="viewAll()">View all</span>
-      <div *ngFor="let allcontest of upcomingContest" class="upcomingContest">
+      <div *ngFor="let allcontest of upcomingContest" class="upcomingContest" (click)="detailContest(allcontest)">
         <ion-label>{{allcontest.username}}</ion-label>
 
         <video width="100" height="100" controls *ngIf="allcontest.media && allcontest.media.indexOf('mp4') != -1" class="upcomoing">

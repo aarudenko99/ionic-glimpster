@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 
 let Url = 'http://glimpsters.betaplanets.com/MobileApp/';
 let imageBaseUrl = 'http://glimpsters.betaplanets.com/MobileApp/uploads/';
@@ -10,11 +10,13 @@ let imageBaseUrl = 'http://glimpsters.betaplanets.com/MobileApp/uploads/';
   providedIn: 'root'
 })
 export class AllService {
+  loading: any;
 
   constructor(
     public http: HttpClient,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
+    public toastController: ToastController
   ) { }
 
   getImageBaseUrl() {
@@ -68,4 +70,36 @@ export class AllService {
       })
     )
   }
+
+  getContestDetails(detail_info) {
+    return this.http.post(Url+"Contest/get_contest_details", detail_info).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
+  async showLoader(){
+    this.loading = await this.loadingCtrl.create({
+      message: 'please wait',
+      backdropDismiss: true,
+    });
+    
+    this.loading.present();
+    await this.loading.onDidDismiss();
+  }
+
+  async dismissLoading() {
+    await this.loading.dismiss();
+  }
+
+  async presentToast(text) {
+    const toast = await this.toastController.create({
+      message: text,
+      position: 'bottom',
+      duration: 3000
+    });
+    toast.present();
+  }
+
 }

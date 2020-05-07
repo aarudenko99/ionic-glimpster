@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { LandingPage } from './landing/landing.page';
 
 const routes: Routes = [
   {
@@ -46,6 +45,10 @@ const routes: Routes = [
   {
     path: 'all-contests',
     loadChildren: () => import('./all-contests/all-contests.module').then( m => m.AllContestsPageModule)
+  },
+  {
+    path: 'detailcontest',
+    loadChildren: () => import('./detailcontest/detailcontest.module').then( m => m.DetailcontestPageModule)
   }
 
 ];
