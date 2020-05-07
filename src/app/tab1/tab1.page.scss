@@ -17,7 +17,6 @@ ion-header {
   }
   .icon_wrap {
     display: flex;
-    margin-top: 40px;
   }
   searchbar-input {
     border-radius: 50px !important;
@@ -26,7 +25,22 @@ ion-header {
   .activeContest {
     height: 150px;
     background: #DDDDDD;
-    padding: 10px;
+    padding: 15px;
+
+    .upcomingContest {
+      display: grid;
+      font-size: 10px;    
+      text-align: center;
+      width: 70px;
+      margin-top:10px;
+    }
+
+    .upcomoing {
+      width: 70px;
+      height: 70px;
+      border-radius: 50% !important;
+      overflow: hidden;
+    }
   }
   .viewAll {
     float: right;

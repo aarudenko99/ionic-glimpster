@@ -1,14 +1,27 @@
 <ion-header class="top_image">
-  <!-- <img src="assets/imgs/top_image.png" class="top_image"> -->
-  <div class="icon_wrap">
-    <ion-icon name="earth-outline" class="world"></ion-icon>
-    <ion-searchbar></ion-searchbar>
-    <ion-icon name="person-circle-outline"></ion-icon>
-  </div>
-  <div class="activeContest">
-    <span>Contests</span>
-    <span class="viewAll" routerLink="/all-contests">View all</span>
-  </div>
+  <ion-row>
+    <ion-col size="12" class="icon_wrap">
+      <ion-icon name="earth-outline" class="world"></ion-icon>
+      <ion-searchbar></ion-searchbar>
+      <ion-icon name="person-circle-outline" routerLink="/profile"></ion-icon>
+    </ion-col>
+    <ion-col size="12" class="activeContest">
+      <span>Contests</span>
+      <span class="viewAll" (click)="viewAll()">View all</span>
+      <div *ngFor="let allcontest of upcomingContest" class="upcomingContest">
+        <ion-label>{{allcontest.username}}</ion-label>
+
+        <video width="100" height="100" controls *ngIf="allcontest.media && allcontest.media.indexOf('mp4') != -1" class="upcomoing">
+          <source [src]="imageBaseUrl + allcontest.media" type="video/mp4">
+        </video>
+        <ion-img *ngIf="allcontest.media && (allcontest.media.indexOf('jpg') || allcontest.media.indexOf('png'))" [src]="imageBaseUrl + allcontest.media" alt="Past Image" class="upcomoing"></ion-img>
+        <ion-img *ngIf="!allcontest.media" [src]="placeholderImage" alt="PastImage" class="upcomoing"></ion-img>
+
+        <ion-label>{{allcontest.start_date}}</ion-label>
+        <ion-label>{{allcontest.start_time}}</ion-label>
+      </div>
+    </ion-col>
+  </ion-row>
 </ion-header>
 
 <ion-content [fullscreen]="true">
