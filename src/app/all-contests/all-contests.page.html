@@ -4,7 +4,6 @@
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/"></ion-back-button>
         </ion-buttons>
-        <ion-title>Contests</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -12,7 +11,7 @@
   <ion-row *ngIf="comingUser != ''">
     <ion-col size="12">
       <div class="upcoming title">Upcoming contest</div>
-      <ion-card *ngFor="let allcontest of upcomingContest" class="contests">
+      <ion-card *ngFor="let allcontest of upcomingContest" class="contests" (click)="detailContest(allcontest)">
         <div class="wrap_image">
           <video width="100" height="100" controls *ngIf="allcontest.media && allcontest.media.indexOf('mp4') != -1">
             <source [src]="imageBaseUrl + allcontest.media" type="video/mp4">
@@ -27,7 +26,7 @@
         </div>
       </ion-card>
       <div class="title">Past contests</div>
-      <ion-card *ngFor="let allcontest of pastContest" class="contests">
+      <ion-card *ngFor="let allcontest of pastContest" class="contests" (click)="detailContest(allcontest)">
         <div class="wrap_image">
           <video width="100" height="100" controls *ngIf="allcontest.media && allcontest.media.indexOf('mp4') != -1">
             <source [src]="imageBaseUrl + allcontest.media" type="video/mp4">

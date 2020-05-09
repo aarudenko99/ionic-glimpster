@@ -1,0 +1,37 @@
+ion-header {
+  .top_image {
+      position: absolute;
+  }
+  ion-toolbar {
+      --background: transparent !important;
+  }
+  ion-back-button {
+      color: white;
+      margin: 40px 0 0 10px;
+  }
+  ion-title {
+    margin-top: 20px;
+    color: white;
+  }
+}
+
+ion-content {
+  .imagewrap {
+    margin-top: 150px;
+    display: flex;
+    overflow-x: scroll;
+    div {
+      text-align: center;
+    }
+    ion-img {
+      width: 300px;
+      box-shadow: rgba(0,0,0,0.8) 0 0 10px;
+      overflow: hidden;
+      margin: 20px;
+    }
+    .placeholder {
+      padding: 100px;
+      height: 80%;
+    }
+  }
+}

@@ -79,6 +79,14 @@ export class AllService {
     )
   }
 
+  getUserLocation(user_id) {
+    return this.http.post(Url+"Profile/users_location", user_id).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
       message: 'please wait',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
@@ -13,6 +13,7 @@ import { AllService } from '../all.service';
 export class AllContestsPage implements OnInit {
   loading: any;
   imageBaseUrl = "";
+  navigationExtras: NavigationExtras;
   placeholderImage = "../../assets/imgs/placeholder.png";
 
   pastContest = [];
@@ -28,11 +29,45 @@ export class AllContestsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.imageBaseUrl = this.router.getCurrentNavigation().extras.state.imageBaseUrl;
-      this.pastContest = this.router.getCurrentNavigation().extras.state.pastContest;
-      this.upcomingContest = this.router.getCurrentNavigation().extras.state.upcomingContest;
-      // console.log(this.upcomingContest);
-    });
+    this.allService.showLoader();
+    this.allService.getAllContest().subscribe(
+      data => {
+        if(data['success'] == 1) {
+          this.imageBaseUrl = this.allService.getImageBaseUrl();
+          this.upcomingContest = data['upcoming_contest']
+          this.pastContest = data['passed_contest'];
+          // this.navigationExtras = {
+          //   state: {
+          //     upcomingContest: this.upcomingContest,
+          //     pastContest: this.pastContest,
+          //     imageBaseUrl: this.imageBaseUrl
+          //   }
+          // };
+          this.allService.dismissLoading();
+        }
+        else {
+          this.allService.presentToast("Error");
+          this.allService.dismissLoading();
+        }
+        
+      },
+
+      err => {
+        console.log(err);
+        this.allService.presentToast("Network error");
+        this.allService.dismissLoading();
+      }
+    )
+  }
+
+  detailContest(allcontest) {
+    
+    this.navigationExtras = {
+      state: {
+        detailContest: allcontest,
+        imageBaseUrl: this.imageBaseUrl
+      }
+    }
+    this.router.navigate(['/detailcontest'], this.navigationExtras);
   }
 }

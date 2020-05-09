@@ -1,17 +1,15 @@
-<ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-title>
-            Tab 2
-        </ion-title>
-    </ion-toolbar>
+<ion-header>
+	<img src="assets/imgs/top_image.png" class="top_image">
+	<ion-title>User Location</ion-title>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title size="large">Tab 2</ion-title>
-        </ion-toolbar>
-    </ion-header>
-
-    <app-explore-container name="Tab 2 page"></app-explore-container>
+	<div class="imagewrap">
+		<div *ngFor="let userLocation of userLocations" class="">
+			<ion-label>{{userLocation.username}}</ion-label>
+			<ion-img *ngIf="userLocation.image != ''" [src]="imageBaseUrl + userLocation.image"></ion-img>
+			<ion-img *ngIf="userLocation.image == ''" [src]="placeholderImage" class="placeholder"></ion-img>
+			<ion-label>{{distanceBetween(userLocation)}}</ion-label>
+		</div>
+	</div>
 </ion-content>

@@ -2,7 +2,7 @@ ion-header {
   // display: flex;
   background-image: url('../../assets/imgs/top_image.png');
   height: 100px;
-  margin-bottom: 150px;
+  margin-bottom: 50px;
   ion-toolbar {
       --background: transparent !important;
   }
@@ -11,9 +11,10 @@ ion-header {
     height: 50px;
     padding: 1% 0;
     margin: 0 10px 0 10px;
+    color: white;
   }
   .world {
-    color: #00dddd;
+    color: white;
   }
   .icon_wrap {
     display: flex;
@@ -23,8 +24,8 @@ ion-header {
     background-color: white !important;
   }
   .activeContest {
-    height: 150px;
-    background: #DDDDDD;
+    height: 50px;
+    background: #EEEEEE;
     padding: 15px;
 
     .upcomingContest {
@@ -44,6 +45,9 @@ ion-header {
   }
   .viewAll {
     float: right;
+  }
+  .header-md::after {
+    height: 0px !important;
   }
 }
 
@@ -76,6 +80,7 @@ ion-content {
     justify-content: space-around;
     div {
       font-size: 20px;
+      display: flex;
     }
   }
 

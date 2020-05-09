@@ -8,10 +8,10 @@
     <ion-col size="12" class="activeContest">
       <span>Contests</span>
       <span class="viewAll" (click)="viewAll()">View all</span>
-      <div *ngFor="let allcontest of upcomingContest" class="upcomingContest" (click)="detailContest(allcontest)">
+      <!-- <div *ngFor="let allcontest of upcomingContest" class="upcomingContest" (click)="detailContest(allcontest)">
         <ion-label>{{allcontest.username}}</ion-label>
 
-        <video width="100" height="100" controls *ngIf="allcontest.media && allcontest.media.indexOf('mp4') != -1" class="upcomoing">
+        <video controls *ngIf="allcontest.media && allcontest.media.indexOf('mp4') != -1" class="upcomoing">
           <source [src]="imageBaseUrl + allcontest.media" type="video/mp4">
         </video>
         <ion-img *ngIf="allcontest.media && (allcontest.media.indexOf('jpg') || allcontest.media.indexOf('png'))" [src]="imageBaseUrl + allcontest.media" alt="Past Image" class="upcomoing"></ion-img>
@@ -19,7 +19,7 @@
 
         <ion-label>{{allcontest.start_date}}</ion-label>
         <ion-label>{{allcontest.start_time}}</ion-label>
-      </div>
+      </div> -->
     </ion-col>
   </ion-row>
 </ion-header>
@@ -49,59 +49,6 @@
     <ion-col size="10" class="sendwrap">
       <ion-input type="text"></ion-input>
       <span item-right><ion-icon name="send"></ion-icon></span>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
-    </ion-col>
-    <ion-col size="12">
-      <ion-button class="signup_btn">SIGN UP</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>

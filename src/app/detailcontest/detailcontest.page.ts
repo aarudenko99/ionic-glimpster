@@ -27,7 +27,7 @@ export class DetailcontestPage implements OnInit {
     // this.allService.showLoader();
     this.route.queryParams.subscribe(params => {
       this.detailContest = this.router.getCurrentNavigation().extras.state.detailContest;
-      this.imageBaseUrl = this.router.getCurrentNavigation().extras.state.imageBaseUrl;
+      // this.imageBaseUrl = this.router.getCurrentNavigation().extras.state.imageBaseUrl;
       this.renderData(this.detailContest);
       // console.log(this.detailContest['id']);
       // this.allService.dismissLoading();

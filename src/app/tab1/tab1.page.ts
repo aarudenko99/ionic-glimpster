@@ -27,25 +27,25 @@ export class Tab1Page {
   ) {}
 
   ngOnInit() {
-    this.showLoader();
+    // this.showLoader();
     this.allService.getAllContest().subscribe(
       data => {
         if(data['success'] == 1) {
           this.imageBaseUrl = this.allService.getImageBaseUrl();
           this.upcomingContest = data['upcoming_contest']
           this.pastContest = data['passed_contest'];
-          this.navigationExtras = {
-            state: {
-              upcomingContest: this.upcomingContest,
-              pastContest: this.pastContest,
-              imageBaseUrl: this.imageBaseUrl
-            }
-          };
-          this.dismissLoading();
+          // this.navigationExtras = {
+          //   state: {
+          //     upcomingContest: this.upcomingContest,
+          //     pastContest: this.pastContest,
+          //     imageBaseUrl: this.imageBaseUrl
+          //   }
+          // };
+          // this.dismissLoading();
         }
         else {
           this.presentToast("Error");
-          this.dismissLoading();
+          // this.dismissLoading();
         }
         
       },
@@ -53,18 +53,17 @@ export class Tab1Page {
       err => {
         console.log(err);
         this.presentToast("Network error");
-        this.dismissLoading();
+        // this.dismissLoading();
       }
     )
   }
 
   viewAll() {
     console.log(this.navigationExtras);
-    this.router.navigate(['/all-contests'], this.navigationExtras);
+    this.router.navigate(['/all-contests']);
   }
 
   detailContest(detailContest) {
-    // console.log(detailContest);
     this.navigationExtras = {
       state: {
         detailContest: detailContest,
