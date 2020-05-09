@@ -46,9 +46,10 @@ ion-header {
   .viewAll {
     float: right;
   }
-  .header-md::after {
-    height: 0px !important;
-  }
+}
+
+.header-md::after {
+  height: 0px !important;
 }
 
 ion-content {

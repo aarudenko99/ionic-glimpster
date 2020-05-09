@@ -11,6 +11,11 @@ ion-header {
   }
 }
 
+
+.header-md::after {
+  height: 0px !important;
+}
+
 ion-content {
   // --background: url('../../assets/imgs/background.png');
   // color: red;

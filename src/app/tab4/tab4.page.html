@@ -1,9 +1,27 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>tab4</ion-title>
-  </ion-toolbar>
+  <img src="assets/imgs/top_image.png" class="top_image">
+  <div class="header">
+    <ion-title>Chat</ion-title>
+    <ion-icon name="add-outline"></ion-icon>
+  </div>
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-tabs>
+          <!-- Tab bar -->
+          <ion-tab-bar slot="bottom">
+            <ion-tab-button >
+              Friends
+            </ion-tab-button>
+            <ion-tab-button>
+              Glimpsters
+            </ion-tab-button>
+          </ion-tab-bar>
+        </ion-tabs>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
