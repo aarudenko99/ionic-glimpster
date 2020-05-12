@@ -1,11 +1,15 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
+<ion-header>
+  <ion-row>
+    <ion-col size="12" class="icon_wrap">
+      <ion-title>Test Post</ion-title>
+    </ion-col>
+    <ion-col size="12" class="activeContest">
+      <ion-img src="../../assets/imgs/logo.png"></ion-img>
+      <ion-button class="post_create" (click)="create_post()">CREATE</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-label>Under construction</ion-label>
+  <ion-textarea placeholder="Type your post here..."></ion-textarea>
 </ion-content>

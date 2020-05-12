@@ -28,19 +28,8 @@ ion-header {
     background: #EEEEEE;
     padding: 15px;
 
-    .upcomingContest {
-      display: grid;
-      font-size: 10px;    
-      text-align: center;
-      width: 70px;
-      margin-top:10px;
-    }
-
-    .upcomoing {
-      width: 70px;
-      height: 70px;
-      border-radius: 50% !important;
-      overflow: hidden;
+    span {
+      font-weight: bold;
     }
   }
   .viewAll {
@@ -56,11 +45,22 @@ ion-content {
   .user_info {
     display: flex;
     align-items: center;
-    .username, .postdate {
-      margin-bottom: 10px;
+    div {
+      margin: 0 0 10px 10px;
+    }
+    .username {
+      font-weight: bold;
+    }
+    .postdate {
+      font-size: 13px;
     }
     .avatar {
-      width: 100px;
+      width: 70px;
+      height: 70px;
+      max-width: 70px;
+      border-radius: 50%;
+      border: 1px solid;
+      max-height: 170px;
     }
     .wrap_icon {
       ion-icon {

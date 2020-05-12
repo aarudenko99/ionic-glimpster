@@ -53,6 +53,10 @@ const routes: Routes = [
   {
     path: 'detailcontest',
     loadChildren: () => import('./detailcontest/detailcontest.module').then( m => m.DetailcontestPageModule)
+  },
+  {
+    path: 'selectfriends',
+    loadChildren: () => import('./selectfriends/selectfriends.module').then( m => m.SelectfriendsPageModule)
   }
 
 ];

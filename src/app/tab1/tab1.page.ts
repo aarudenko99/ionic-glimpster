@@ -13,10 +13,12 @@ import { AllService } from '../all.service';
 export class Tab1Page {
   loading: any;
   imageBaseUrl = "";
-  comingImage = "";
-  pastContest = [];
-  upcomingContest = [];
-  navigationExtras: NavigationExtras;
+  placeholderImage = "../../assets/imgs/profile/avatar.png";
+  // comingImage = "";
+  body = new FormData();
+  posts = [];
+
+
 
   constructor(
     private allService: AllService,
@@ -28,50 +30,76 @@ export class Tab1Page {
 
   ngOnInit() {
     // this.showLoader();
-    this.allService.getAllContest().subscribe(
-      data => {
-        if(data['success'] == 1) {
-          this.imageBaseUrl = this.allService.getImageBaseUrl();
-          this.upcomingContest = data['upcoming_contest']
-          this.pastContest = data['passed_contest'];
-          // this.navigationExtras = {
-          //   state: {
-          //     upcomingContest: this.upcomingContest,
-          //     pastContest: this.pastContest,
-          //     imageBaseUrl: this.imageBaseUrl
-          //   }
-          // };
-          // this.dismissLoading();
+    this.storage.get('user').then(userInfo => {
+      this.imageBaseUrl = this.allService.getImageBaseUrl();
+      // console.log(userInfo.user_id, userInfo['user_info']['lat'], userInfo['user_info']['lng']);
+      this.body.append('user_id', userInfo.user_id);
+      this.body.append('latitude', userInfo['user_info']['lat']);
+      this.body.append('longitude', userInfo['user_info']['lng']);
+      this.allService.getPosts(this.body).subscribe (
+        data => {
+          if(data['success'] == 1) {
+            this.posts = data['posts'];
+            console.log( this.posts);
+          }
+          // user_image
+          // created_at 
+          // likes
+          // media
+          // post_thumb
+          // comments
+          // share
+
         }
-        else {
-          this.presentToast("Error");
-          // this.dismissLoading();
-        }
+      )
+    })
+    // user_id
+    // latitude
+    // longitude
+    // this.allService.getAllContest().subscribe(
+    //   data => {
+    //     if(data['success'] == 1) {
+    //       this.imageBaseUrl = this.allService.getImageBaseUrl();
+    //       this.upcomingContest = data['upcoming_contest']
+    //       this.pastContest = data['passed_contest'];
+    //       // this.navigationExtras = {
+    //       //   state: {
+    //       //     upcomingContest: this.upcomingContest,
+    //       //     pastContest: this.pastContest,
+    //       //     imageBaseUrl: this.imageBaseUrl
+    //       //   }
+    //       // };
+    //       // this.dismissLoading();
+    //     }
+    //     else {
+    //       this.presentToast("Error");
+    //       // this.dismissLoading();
+    //     }
         
-      },
+    //   },
 
-      err => {
-        console.log(err);
-        this.presentToast("Network error");
-        // this.dismissLoading();
-      }
-    )
+    //   err => {
+    //     console.log(err);
+    //     this.presentToast("Network error");
+    //     // this.dismissLoading();
+    //   }
+    // )
   }
 
-  viewAll() {
-    console.log(this.navigationExtras);
-    this.router.navigate(['/all-contests']);
-  }
+  // viewAll() {
+  //   console.log(this.navigationExtras);
+  //   this.router.navigate(['/all-contests']);
+  // }
 
-  detailContest(detailContest) {
-    this.navigationExtras = {
-      state: {
-        detailContest: detailContest,
-        imageBaseUrl: this.imageBaseUrl
-      }
-    }
-    this.router.navigate(['/detailcontest'], this.navigationExtras);
-  }
+  // detailContest(detailContest) {
+  //   this.navigationExtras = {
+  //     state: {
+  //       detailContest: detailContest,
+  //       imageBaseUrl: this.imageBaseUrl
+  //     }
+  //   }
+  //   this.router.navigate(['/detailcontest'], this.navigationExtras);
+  // }
 
   async showLoader(){
     this.loading = await this.loadingCtrl.create({

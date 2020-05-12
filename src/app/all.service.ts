@@ -87,6 +87,22 @@ export class AllService {
     )
   }
 
+  createPost(user_info) {
+    return this.http.post(Url+"Post/create_status_post", user_info).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
+  getPosts(userInfo) {
+    return this.http.post(Url+"Post/get_posts", userInfo).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
       message: 'please wait',
