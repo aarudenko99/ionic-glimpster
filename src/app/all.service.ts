@@ -103,6 +103,30 @@ export class AllService {
     )
   }
 
+  editPost(userInfo) {
+    return this.http.post(Url+"Post/edit_post", userInfo).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
+  deletePost(deleteInfo) {
+    return this.http.post(Url+"Post/Delete", deleteInfo).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
+  reportPost(reportInfo) {
+    return this.http.post(Url+"Post/report_user", reportInfo).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
       message: 'please wait',

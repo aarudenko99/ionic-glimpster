@@ -57,6 +57,14 @@ const routes: Routes = [
   {
     path: 'selectfriends',
     loadChildren: () => import('./selectfriends/selectfriends.module').then( m => m.SelectfriendsPageModule)
+  },
+  {
+    path: 'editpost',
+    loadChildren: () => import('./editpost/editpost.module').then( m => m.EditpostPageModule)
+  },
+  {
+    path: 'report',
+    loadChildren: () => import('./report/report.module').then( m => m.ReportPageModule)
   }
 
 ];

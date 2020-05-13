@@ -1,0 +1,47 @@
+ion-header {
+  .top_image {
+      position: absolute;
+  }
+  ion-toolbar {
+      --background: transparent !important;
+  }
+  ion-back-button {
+      color: white;
+      margin: 40px 0 0 10px;
+  }
+  ion-title {
+    margin-top: 20px;
+    color: white;
+  }
+}
+
+ion-content {
+  ion-grid {
+    background: #eeeeee;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    padding: 0 40px;
+    align-items: center;
+
+    ion-icon {
+      font-size: 70px;
+      color: green;
+    }
+
+    ion-label {
+      margin-top: 20px;
+    }
+
+    ion-label:nth-child(2) {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    ion-label:nth-child(3) {
+      color: #555555;
+    }
+  }
+}
