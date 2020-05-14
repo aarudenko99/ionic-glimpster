@@ -12,10 +12,14 @@ import { AllService } from '../all.service';
 })
 export class Tab1Page {
   loading: any;
+  comment = "";
   imageBaseUrl = "";
   placeholderImage = "../../assets/imgs/profile/avatar.png";
   body = new FormData();
   posts = [];
+  likesFlag = false;
+  currentLikes = 0;
+  likesClass = 'heart';
   currentUser : number;
   activeUserId: number;
   activePostId: number;
@@ -42,6 +46,7 @@ export class Tab1Page {
         data => {
           if(data['success'] == 1) {
             this.posts = data['posts'];
+            console.log(this.posts);
           }
         }
       )
@@ -88,6 +93,40 @@ export class Tab1Page {
     else {
       this.normalAlert();
     }
+  }
+
+  changeLikes(postId) {
+    if(this.likesFlag == false) this.currentLikes++;
+    else this.currentLikes--;
+    let likesInfo = new FormData();
+    likesInfo.append('post_id', postId);
+    likesInfo.append('user_id', this.currentUser+"");
+    this.allService.likePost(likesInfo).subscribe(
+      data => {
+        // console.log("data", data);
+      }
+    )
+    // if(this.currentLikes > 0) this.likesClass = "heart";
+    // else this.likesClass = "heart-outline";
+    this.likesFlag = !this.likesFlag;
+    // console.log(this.currentLikes);
+  }
+
+  addComment(postId) {
+    console.log((<HTMLInputElement>document.getElementById("comment" + postId)).value);
+    let commentInfo = new FormData();
+    commentInfo.append('post_id', postId);
+    commentInfo.append('user_id', this.currentUser + "");
+    commentInfo.append('comment', (<HTMLInputElement>document.getElementById("comment" + postId)).value);
+
+    (<HTMLInputElement>document.getElementById("comment" + postId)).value = "";
+    
+    this.allService.addPostComment(commentInfo).subscribe(
+      data => {
+        console.log(data);
+      }
+    )
+    // console.log(this.comment, " ", userId);
   }
 
   async showLoader(){

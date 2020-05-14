@@ -127,6 +127,25 @@ export class AllService {
     )
   }
 
+  likePost(likeInfo) {
+    return this.http.post(Url+"Post/like_post", likeInfo).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
+  addPostComment(commentInfo) {
+    return this.http.post(Url+"Post/add_post_comment", commentInfo).pipe(
+      map(data => {
+        return data;
+      })
+    )
+
+  }
+
+  addPostCo
+
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
       message: 'please wait',
