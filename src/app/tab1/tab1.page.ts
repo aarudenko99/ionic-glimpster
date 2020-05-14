@@ -21,6 +21,8 @@ export class Tab1Page {
   currentLikes = 0;
   likesClass = 'heart';
   currentUser : number;
+  lat : any;
+  lng : any;
   activeUserId: number;
   activePostId: number;
 
@@ -39,6 +41,8 @@ export class Tab1Page {
     this.storage.get('user').then(userInfo => {
       this.imageBaseUrl = this.allService.getImageBaseUrl();
       this.currentUser = userInfo.user_id;
+      this.lat = userInfo['user_info']['lat'];
+      this.lng = userInfo['user_info']['lng'];
       this.body.append('user_id', userInfo.user_id);
       this.body.append('latitude', userInfo['user_info']['lat']);
       this.body.append('longitude', userInfo['user_info']['lng']);
@@ -100,9 +104,13 @@ export class Tab1Page {
     else this.currentLikes--;
     let likesInfo = new FormData();
     likesInfo.append('post_id', postId);
-    likesInfo.append('user_id', this.currentUser+"");
+    likesInfo.append('user_id', `${this.currentUser}`);
     this.allService.likePost(likesInfo).subscribe(
       data => {
+        if (data['success'] == 1) {
+          const ind = this.posts.findIndex(x => x.id === postId)
+          this.posts[ind].likes = `${Number(this.posts[ind].likes) + data['status']}`;
+        }
         // console.log("data", data);
       }
     )
@@ -116,14 +124,22 @@ export class Tab1Page {
     console.log((<HTMLInputElement>document.getElementById("comment" + postId)).value);
     let commentInfo = new FormData();
     commentInfo.append('post_id', postId);
-    commentInfo.append('user_id', this.currentUser + "");
+    commentInfo.append('user_id', `${this.currentUser}`);
     commentInfo.append('comment', (<HTMLInputElement>document.getElementById("comment" + postId)).value);
 
     (<HTMLInputElement>document.getElementById("comment" + postId)).value = "";
+    // console.log(postId);
     
     this.allService.addPostComment(commentInfo).subscribe(
       data => {
-        console.log(data);
+        // console.log("comment = ========", data);
+        if(data['success'] == 1) {
+          const ind = this.posts.findIndex(x => x.id === postId)
+          this.posts[ind].comments = `${Number(this.posts[ind].comments) + 1}`;
+          // console.log(ind);
+          // console.log(this.posts[Number(postId)]);
+          // = `${Number(this.posts[postId].comments ) + 1}`;
+        }
       }
     )
     // console.log(this.comment, " ", userId);
@@ -187,8 +203,8 @@ export class Tab1Page {
           text: 'Ok',
           handler: () => {
             let reportInfo = new FormData();
-            reportInfo.append('user_id', this.activeUserId+"");
-            reportInfo.append('post_id', this.activePostId+"");
+            reportInfo.append('user_id', `${this.activeUserId}`);
+            reportInfo.append('post_id', `${this.activePostId}`);
             this.allService.deletePost(reportInfo).subscribe(
               data => {
                 if(data['success'] == 1) {
@@ -197,6 +213,9 @@ export class Tab1Page {
                 else {
                   this.presentToast(data['message']);
                 }
+              },
+              err => {
+
               }
             )
           }
@@ -219,8 +238,17 @@ export class Tab1Page {
           text: 'Delete',
           handler: () => {
             let deleteInfo = new FormData();
-            deleteInfo.append('user_id', this.activeUserId+"");
-            deleteInfo.append('post_id', this.activePostId+"");
+            deleteInfo.append('user_id', `${this.activeUserId}`);
+            deleteInfo.append('post_id', `${this.activePostId}`);
+            // const ind = this.posts.findIndex(x => x.id === this.activePostId)
+            let cId = this.activePostId
+            let filtered = this.posts.filter(function(item) {
+              return item.id != cId
+            })
+            console.log(filtered);
+            this.posts = filtered;
+            // this.
+            // this.posts = this.posts.splice(ind,1);
             this.allService.deletePost(deleteInfo).subscribe(
               data => {
                 if(data['success'] == 1) {
