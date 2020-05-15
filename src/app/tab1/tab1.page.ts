@@ -25,6 +25,8 @@ export class Tab1Page {
   lng : any;
   activeUserId: number;
   activePostId: number;
+  activePostText = "";
+  
 
   constructor(
     private allService: AllService,
@@ -32,12 +34,14 @@ export class Tab1Page {
     private storage: Storage,
     private router: Router,
     private toastController: ToastController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    // private navigationExtras: NavigationExtras
   ) {}
 
   ngOnInit() {
     
     // this.showLoader();
+    console.log("Is this you again?");
     this.storage.get('user').then(userInfo => {
       this.imageBaseUrl = this.allService.getImageBaseUrl();
       this.currentUser = userInfo.user_id;
@@ -55,37 +59,6 @@ export class Tab1Page {
         }
       )
     })
-    // user_id
-    // latitude
-    // longitude
-    // this.allService.getAllContest().subscribe(
-    //   data => {
-    //     if(data['success'] == 1) {
-    //       this.imageBaseUrl = this.allService.getImageBaseUrl();
-    //       this.upcomingContest = data['upcoming_contest']
-    //       this.pastContest = data['passed_contest'];
-    //       // this.navigationExtras = {
-    //       //   state: {
-    //       //     upcomingContest: this.upcomingContest,
-    //       //     pastContest: this.pastContest,
-    //       //     imageBaseUrl: this.imageBaseUrl
-    //       //   }
-    //       // };
-    //       // this.dismissLoading();
-    //     }
-    //     else {
-    //       this.presentToast("Error");
-    //       // this.dismissLoading();
-    //     }
-        
-    //   },
-
-    //   err => {
-    //     console.log(err);
-    //     this.presentToast("Network error");
-    //     // this.dismissLoading();
-    //   }
-    // )
   }
 
   viewMore(userId, postId) {
@@ -143,6 +116,18 @@ export class Tab1Page {
       }
     )
     // console.log(this.comment, " ", userId);
+  }
+
+  editComment(userId, postId) {
+    
+    let navigationExtras: NavigationExtras = {
+      state: {
+        userId: userId,
+        postId: postId
+      }
+    }
+    this.router.navigate(['/allcomment'], navigationExtras);
+    // console.log(userId)
   }
 
   async showLoader(){
@@ -294,7 +279,26 @@ export class Tab1Page {
           text: 'Ok',
           handler: (data) => {
             if(data == 'edit') {
-              this.router.navigate(['/editpost']);
+
+              const ind = this.posts.findIndex(x => x.id === this.activePostId)
+              console.log(this.posts[ind]);
+    
+              let navigationExtras: NavigationExtras = {
+                state: {
+                  editPost: this.posts[ind],
+                  imageBaseUrl: this.imageBaseUrl
+                }
+              }
+              // this.activePostId
+              
+              // let navigationExtras: NavigationExtras = {
+              //   queryParams: {
+              //     postId: this.activePostId,
+              //     userId: this.activeUserId,
+              //     postText: this.activePostText
+              //   }
+              // };
+              this.router.navigate(['/editpost'], navigationExtras);
             }
             else {
               // this.router.navigate['/login'];

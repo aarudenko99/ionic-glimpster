@@ -39,7 +39,7 @@
       <div><ion-icon [name]="post.likes > 0 ? 'heart' : 'heart-outline'" (click)="changeLikes(post.id)"></ion-icon>{{post.likes}}</div>
       <!-- <div *ngIf="post.likes != 0"><ion-icon name="heart"></ion-icon><span>{{post.likes}}</span></div>
       <div *ngIf="post.likes == 0"><ion-icon name="heart-outline"></ion-icon><span>{{post.likes}}</span></div> -->
-      <div><ion-icon name="mail-outline"></ion-icon><span>{{post.comments}}</span></div>
+      <div><ion-icon name="mail-outline" (click)="editComment(post.user_id, post.id)"></ion-icon><span>{{post.comments}}</span></div>
       <div><ion-icon name="share-social-outline"></ion-icon><span>{{post.share_status}}</span></div>
     </ion-col>
     <ion-col size="10" class="sendwrap">

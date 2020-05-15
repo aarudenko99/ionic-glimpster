@@ -65,6 +65,10 @@ const routes: Routes = [
   {
     path: 'report',
     loadChildren: () => import('./report/report.module').then( m => m.ReportPageModule)
+  },
+  {
+    path: 'allcomment',
+    loadChildren: () => import('./allcomment/allcomment.module').then( m => m.AllcommentPageModule)
   }
 
 ];

@@ -1,9 +1,37 @@
 <ion-header>
+  <img src="assets/imgs/top_image.png" class="top_image">
   <ion-toolbar>
-    <ion-title>editpost</ion-title>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Edit Post</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  
+  <ion-row>
+    <ion-col size="12">
+      <div class="user_info">
+        <div><img [src]="post.user_image ? imageBaseUrl+post.user_image : placeholderImage" class="avatar"/></div>
+        <div>
+          <div class="username">{{post.username}}</div>
+          <div class="postdate">{{post.created_at}}</div>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size="12">
+      <img *ngIf="post.post_type == 'image'" [src]="imageBaseUrl+post.media" class="postimage"/>
+      <video controls *ngIf="post.post_type == 'video'" class="postimage">
+        <source [src]="imageBaseUrl+'video/'+post.media" type="video/mp4">
+      </video>
+    </ion-col>
+    <ion-col size="12">
+      <ion-textarea [(ngModel)]="updatedPost"></ion-textarea>
+      <!-- <ion-label>{{post.post_text}}</ion-label> -->
+    </ion-col>
+    <ion-col size="12">
+      <ion-button (click)="updatePost()">UPDATE</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

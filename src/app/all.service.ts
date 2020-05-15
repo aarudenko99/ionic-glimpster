@@ -103,8 +103,8 @@ export class AllService {
     )
   }
 
-  editPost(userInfo) {
-    return this.http.post(Url+"Post/edit_post", userInfo).pipe(
+  editPost(updateInfo) {
+    return this.http.post(Url+"Post/edit_post", updateInfo).pipe(
       map(data => {
         return data;
       })
@@ -141,10 +141,25 @@ export class AllService {
         return data;
       })
     )
-
   }
 
-  addPostCo
+  updatePostComment(commentInfo) {
+    return this.http.post(Url+"Post/update_post_comment", commentInfo).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
+  getComments(commentInfo) {
+    return this.http.post(Url+'Post/get_comments', commentInfo).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
+  // addPostCo
 
   async showLoader(){
     this.loading = await this.loadingCtrl.create({

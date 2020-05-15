@@ -1,0 +1,31 @@
+<ion-header>
+  <img src="assets/imgs/top_image.png" class="top_image">
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>All Comments</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let comment of comments">
+      <ion-col size="12">
+        <div class="user_info">
+          <div><img [src]="comment.image ? imageBaseUrl+comment.image : placeholderImage" class="avatar"/></div>
+          <div>
+            <div class="username">{{comment.username}}</div>
+            <div class="postdate">{{comment.created_at}}</div>
+          </div>
+          <div class="wrap_icon" *ngIf="userId == loginUser">
+            <ion-icon name="ellipsis-vertical-outline" (click)="editComment(comment.id, comment.comment)"></ion-icon>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label>{{comment.comment}}</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
