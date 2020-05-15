@@ -159,6 +159,14 @@ export class AllService {
     )
   }
 
+  deleteComment(deleteInfo) {
+    return this.http.post(Url+'Post/delete_post_comment', deleteInfo).pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
   // addPostCo
 
   async showLoader(){

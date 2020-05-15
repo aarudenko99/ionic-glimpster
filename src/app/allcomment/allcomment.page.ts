@@ -116,8 +116,11 @@ export class AllcommentPage implements OnInit {
             commentInfo.append('comment', data1.comment);
             this.allService.updatePostComment(commentInfo).subscribe(
               data => {
-                const ind = this.comments.findIndex(x => x.id === this.commentId)
-                this.comments[ind].comment = data1.comment;
+                this.presentToast(data['message']);
+                if(data['success'] == 1) {
+                  const ind = this.comments.findIndex(x => x.id === this.commentId)
+                  this.comments[ind].comment = data1.comment;
+                }
                 // console.log(data);
               }
             )
@@ -162,7 +165,24 @@ export class AllcommentPage implements OnInit {
               // this
             }
             else {
-              console.log("delete");
+              this.commentInfo.append('post_id', this.postId);
+              this.commentInfo.append('id', this.commentId);
+              this.allService.deleteComment(this.commentInfo).subscribe(
+                data1 => {
+                  this.presentToast(data1['message']);
+                  if(data1['success'] == 1) {
+                    // const ind = this.comments.findIndex(x => x.id === this.commentId)
+                    const cId = this.commentId;
+                    let filtered = this.comments.filter(function(item) {
+                      return item.id != cId;
+                    })
+                    this.comments = filtered;
+                    
+                    // this.comments[ind].comment = data1.comment;
+                  }
+                }
+              )
+              // console.log(this.postId, " ", this.commentId);
             }
           }
         }
@@ -170,6 +190,15 @@ export class AllcommentPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async presentToast(text) {
+    const toast = await this.toastController.create({
+      message: text,
+      position: 'bottom',
+      duration: 3000
+    });
+    toast.present();
   }
 
 }
