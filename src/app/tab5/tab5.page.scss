@@ -21,6 +21,11 @@ ion-content {
     margin-top: 150px;
     .userimage {
       text-align: center;
+      margin: 0 auto;
+      width: 150px;
+      border-radius: 50%;
+      /* overflow: hidden; */
+      border: 1px solid;
     }
   }
   .card_images {
@@ -28,7 +33,8 @@ ion-content {
     height: 57px;
   }
   ion-card {
-    width: 100px;
+    // width: 100px;
+    text-align: center;
     margin: 0 !important;
   }
 }

@@ -14,7 +14,7 @@ import { AllService } from '../all.service';
 export class AllcommentPage implements OnInit {
   postId : any;
   userId : any;
-  loginUser : any;
+  loginUser = "";
   commentId : any;
   activeComment : any;
   commentInfo = new FormData();
@@ -49,6 +49,9 @@ export class AllcommentPage implements OnInit {
               }
             )
           }
+          // else {
+          //   this.
+          // }
           // console.log(data);
         }
       )
