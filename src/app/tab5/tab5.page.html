@@ -13,7 +13,6 @@
           <!-- <img [src]="userImage" (click)="selectImage('userimage')" class="inner_img"> -->
           <img [src]="userinfo.image ? imageBaseUrl+userinfo.image : placeholderImage" (click)="updateAvatar()"/>
         </div>
-        
       </ion-col>
 
       <ion-col size="12" class="statistic">
@@ -22,17 +21,38 @@
           <div>Posts</div>
         </ion-col>
         <ion-col size="4" class="">
-          <div>0</div>
+          <div>{{followers}}</div>
           <div>Followers</div>
         </ion-col>
         <ion-col size="4" class="">
-          <div>0</div>
+          <div>{{following}}</div>
           <div>Followings</div>
+        </ion-col>
+      </ion-col>
+
+      <ion-col size="12" class="statistic">
+        <ion-col size="4" >
+          <div class="sub_sta" (click)="pointAlert()">
+            <div>0</div>
+            <div>Points</div>
+          </div>
+        </ion-col>
+        <ion-col size="4" >
+          <div class="sub_sta">
+            <div>0</div>
+            <div>Contests attended</div>
+          </div>
+        </ion-col>
+        <ion-col size="4" >
+          <div class="sub_sta">
+            <div>0</div>
+            <div>Coupons Won</div>
+          </div>
         </ion-col>
       </ion-col>
       
       <ion-col size="4">
-        <ion-card>
+        <ion-card routerLink="/businesscard">
           <ion-card-header>
             <img src="assets/imgs/profile/business_card.png" class="card_images">
           </ion-card-header>

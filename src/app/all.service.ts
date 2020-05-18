@@ -177,6 +177,26 @@ export class AllService {
     )
   }
 
+  getFollowing(userinfo) {
+    return this.http.post(Url+'Follow/get_following', userinfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
+  getFollowers(userinfo) {
+    return this.http.post(Url+'Follow/get_followers', userinfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
   // addPostCo
 
   async showLoader(){

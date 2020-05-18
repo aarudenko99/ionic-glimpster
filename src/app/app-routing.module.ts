@@ -77,6 +77,10 @@ const routes: Routes = [
   {
     path: 'postdetail',
     loadChildren: () => import('./postdetail/postdetail.module').then( m => m.PostdetailPageModule)
+  },
+  {
+    path: 'businesscard',
+    loadChildren: () => import('./businesscard/businesscard.module').then( m => m.BusinesscardPageModule)
   }
 
 ];

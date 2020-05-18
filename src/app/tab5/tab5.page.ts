@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/Camera/ngx';
-import { ActionSheetController, ToastController, Platform, LoadingController } from '@ionic/angular';
+import { ActionSheetController, ToastController, Platform, AlertController } from '@ionic/angular';
 import { File, FileEntry } from '@ionic-native/File/ngx';
 import { HttpClient } from '@angular/common/http';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
@@ -23,6 +23,8 @@ export class Tab5Page implements OnInit {
   imageBaseUrl = "http://glimpsters.betaplanets.com/MobileApp/uploads/";
   images = [];
   postsCount = 0;
+  followers = 0;
+  following = 0;
   myPosts = [];
 
   constructor(
@@ -37,6 +39,7 @@ export class Tab5Page implements OnInit {
     private toastController: ToastController,
     private allService: AllService,
     private router: Router,
+    private alertController: AlertController
     // private navigationExtras: NavigationExtras
   ) { }
 
@@ -58,6 +61,23 @@ export class Tab5Page implements OnInit {
             }
           }
         )
+
+        this.allService.getFollowers(body).subscribe(
+          data => {
+            if(data['success'] == 1) {
+              this.followers = data['follwers'].length;
+            }
+          }
+        )
+
+        this.allService.getFollowing(body).subscribe(
+          data => {
+            if(data['success'] == 1) {
+              this.following = data['follwers'].length;
+              // console.log(data);
+            }
+          }
+        )
       }
     )
   }
@@ -71,6 +91,47 @@ export class Tab5Page implements OnInit {
     }
 
     this.router.navigate(['/mypost'], navigationExtras);
+  }
+
+  async pointAlert() {
+    const alert = await this.alertController.create({
+      header: '',
+      inputs: [
+        {
+          name: 'Select Points Type',
+          type: 'radio',
+          label: 'Select Points Type',
+          value: '1',
+          checked: true
+        },
+        {
+          name: 'Watch Ads',
+          type: 'radio',
+          label: 'Watch Ads',
+          value: '2'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+        }, {
+          text: 'Ok',
+          handler: (data) => {
+            if(data == '1') {
+              console.log("1");
+            }
+            else {
+              // this.router.navigate(['/businesscard']);
+              console.log("2");
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async updateAvatar() {
