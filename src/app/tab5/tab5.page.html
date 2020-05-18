@@ -11,10 +11,26 @@
       <ion-col size="12">
         <div class="userimage">
           <!-- <img [src]="userImage" (click)="selectImage('userimage')" class="inner_img"> -->
-          <img src="assets/imgs/profile/avatar.png"/>
+          <img [src]="userinfo.image ? imageBaseUrl+userinfo.image : placeholderImage" (click)="updateAvatar()"/>
         </div>
         
       </ion-col>
+
+      <ion-col size="12" class="statistic">
+        <ion-col size="4" (click)="getMyPosts()">
+          <div>{{postsCount}}</div>
+          <div>Posts</div>
+        </ion-col>
+        <ion-col size="4" class="">
+          <div>0</div>
+          <div>Followers</div>
+        </ion-col>
+        <ion-col size="4" class="">
+          <div>0</div>
+          <div>Followings</div>
+        </ion-col>
+      </ion-col>
+      
       <ion-col size="4">
         <ion-card>
           <ion-card-header>

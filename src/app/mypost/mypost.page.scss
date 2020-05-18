@@ -1,0 +1,35 @@
+ion-header {
+  .top_image {
+      position: absolute;
+  }
+  ion-toolbar {
+      --background: transparent !important;
+  }
+  ion-back-button {
+      color: white;
+      margin: 40px 0 0 10px;
+  }
+  ion-title {
+    margin-top: 20px;
+    color: white;
+  }
+}
+
+ion-content {
+  ion-grid {
+    margin-top: 50px;
+    background: #EEEEEE;
+    ion-col {
+      // min-width: 120px !important;
+      background: white;
+      min-width: 100px;
+      min-height: 150px;
+      align-items: center;
+      display: flex;
+      // margin: 5px;
+      div {
+        margin: 0 auto;
+      }
+    }
+  }
+}

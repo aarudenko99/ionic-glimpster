@@ -1,0 +1,22 @@
+<ion-header>
+  <img src="assets/imgs/top_image.png" class="top_image">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{userName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let mypost of myPosts" size="4">
+        <!-- {{mypost.post_thumb}} -->
+        <div *ngIf="mypost.post_type == 'status'">{{mypost.post_text}}</div>
+        <ion-img *ngIf="mypost.post_type == 'image'" [src]="imageBaseUrl+mypost.post_thumb"></ion-img>
+        <ion-img *ngIf="mypost.post_type == 'video'" [src]="videoBaseUrl+mypost.post_thumb"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

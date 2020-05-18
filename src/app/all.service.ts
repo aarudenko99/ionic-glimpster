@@ -167,6 +167,16 @@ export class AllService {
     )
   }
 
+  getMyPosts(userinfo) {
+    return this.http.post(Url+'Post/my_posts', userinfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
   // addPostCo
 
   async showLoader(){

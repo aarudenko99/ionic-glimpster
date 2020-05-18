@@ -20,7 +20,7 @@ export class AllcommentPage implements OnInit {
   commentInfo = new FormData();
   comments = [];
   placeholderImage = "../../assets/imgs/profile/avatar.png";
-  imageBaseUrl = "http://glimpsters.betaplanets.com/MobileApp/uploads";
+  imageBaseUrl = "http://glimpsters.betaplanets.com/MobileApp/uploads/";
 
   constructor(
     private allService: AllService,

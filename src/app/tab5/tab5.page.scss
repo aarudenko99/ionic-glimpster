@@ -21,11 +21,22 @@ ion-content {
     margin-top: 150px;
     .userimage {
       text-align: center;
-      margin: 0 auto;
-      width: 150px;
-      border-radius: 50%;
-      /* overflow: hidden; */
-      border: 1px solid;
+      img {
+        margin: 0 auto;
+        width: 150px;
+        border-radius: 50%;
+        /* overflow: hidden; */
+        border: 1px solid;
+      }
+    }
+    .statistic{
+      display: flex;
+      text-align: center;
+      ion-col{
+        div:first-child {
+          font-size: 20px;
+        }
+      }
     }
   }
   .card_images {
