@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-mypost',
@@ -15,7 +15,7 @@ export class MypostPage implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    // private 
+    // private navExtras: NavigationExtras
   ) { }
 
   ngOnInit() {
@@ -26,6 +26,22 @@ export class MypostPage implements OnInit {
         console.log(this.myPosts);
       }
     )
+  }
+
+  viewPost(activePost) {
+    let navExtras: NavigationExtras = {
+      queryParams: {
+        created_at: activePost.created_at,
+        post_text: activePost.post_text,
+        likes: activePost.likes,
+        comments: activePost.comments,
+        post_type: activePost.post_type,
+        media: activePost.media,
+      }
+    };
+    // this.navExtras.queryParams
+    console.log(activePost);
+    this.router.navigate(['/postdetail'], navExtras);
   }
 
 }
