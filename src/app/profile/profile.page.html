@@ -20,23 +20,19 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-input type="text" placeholder="User name"></ion-input>
+            <ion-label>User Name</ion-label>
+            <ion-input type="text" [(ngModel)]="userName"  name="username"></ion-input>
           </ion-item>
         </ion-col>
         
         <ion-col size="12">
           <ion-item>
-            <ion-input type="number" placeholder="Mobile Number"></ion-input>
+            <ion-label>Mobile Number</ion-label>
+            <ion-input type="number" [(ngModel)]="mobileNumber" name="mobilenumber"></ion-input>
           </ion-item>
         </ion-col>
         
-        <ion-col size="12">
-          <ion-item>
-            
-          </ion-item>
-        </ion-col>
-        
-        <ion-col size="12">
+        <ion-col size="12" style="margin-top: 20px;">
           <ion-item>
             <span routerLink="/changepassword">Change Password</span>
           </ion-item>
@@ -55,7 +51,7 @@
         </ion-col>
 
         <ion-col size="12">
-          <ion-button class="logout">UPDATE PROFILE</ion-button>
+          <ion-button class="logout" (click)="updateProfile()">UPDATE PROFILE</ion-button>
         </ion-col>
         <ion-col size="12">
           <ion-button (click)="doLogout()" class="logout">LOGOUT</ion-button>

@@ -197,6 +197,16 @@ export class AllService {
     )
   }
 
+  updateUserInfo(userinfo) {
+    return this.http.post(Url+'Api/update_userinfo', userinfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
   // addPostCo
 
   async showLoader(){
