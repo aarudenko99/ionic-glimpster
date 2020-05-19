@@ -81,6 +81,10 @@ const routes: Routes = [
   {
     path: 'businesscard',
     loadChildren: () => import('./businesscard/businesscard.module').then( m => m.BusinesscardPageModule)
+  },
+  {
+    path: 'coupons',
+    loadChildren: () => import('./coupons/coupons.module').then( m => m.CouponsPageModule)
   }
 
 ];
