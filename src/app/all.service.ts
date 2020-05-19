@@ -207,6 +207,26 @@ export class AllService {
     )
   }
 
+  verifiedRequest(userinfo) {
+    return this.http.post(Url+'Api/verified_account_request', userinfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
+  sponsorRequest(userinfo) {
+    return this.http.post(Url+'Api/sponser_request', userinfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
   // addPostCo
 
   async showLoader(){

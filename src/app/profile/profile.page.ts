@@ -16,6 +16,7 @@ export class ProfilePage implements OnInit {
   mobileNumber = "";
   userId = "";
   userInfo = [];
+  body = new FormData();
 
   constructor(
     private alertController: AlertController,
@@ -60,11 +61,11 @@ export class ProfilePage implements OnInit {
   }
 
   updateProfile() {
-    let body = new FormData();
-    body.append('user_id', this.userId);
-    body.append('phone', this.mobileNumber);
-    body.append('username', this.userName);
-    this.allService.updateUserInfo(body).subscribe(
+    // let body = new FormData();
+    this.body.append('user_id', this.userId);
+    this.body.append('phone', this.mobileNumber);
+    this.body.append('username', this.userName);
+    this.allService.updateUserInfo(this.body).subscribe(
       data => {
         if(data['success'] == 1) {
           // console.log(data['message']);
@@ -75,5 +76,67 @@ export class ProfilePage implements OnInit {
         }
       }
     )
+  }
+
+  verifiedRequest() {
+    this.body.append('user_id', this.userId);
+    this.allService.verifiedRequest(this.body).subscribe(
+      data => {
+        this.verifiedAlert(data['message']);
+      }
+    )
+  }
+
+  sponsorRequest() {
+    this.body.append('user_id', this.userId);
+    this.allService.sponsorRequest(this.body).subscribe(
+      data => {
+        this.sponsorAlert(data['message']);
+      }
+    )
+  }
+
+  async verifiedAlert(text) {
+    const alert = await this.alertController.create({
+      header: 'Verify Account',
+      message: 'Request to a verified account',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        }, {  
+          text: 'Submit',
+          handler: () => {
+            this.allService.presentToast(text);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async sponsorAlert(text) {
+    const alert = await this.alertController.create({
+      header: 'Sponsored Account',
+      message: 'Request to a sponsored account',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        }, {
+          text: 'Submit',
+          handler: () => {
+            this.allService.presentToast(text);
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 }
