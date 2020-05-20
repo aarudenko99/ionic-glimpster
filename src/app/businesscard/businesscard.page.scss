@@ -18,3 +18,28 @@ ion-header {
 .header-md::after {
   height: 0px !important;
 }
+
+ion-content {
+  ion-grid {
+    margin: 80px 5px 5px 5px;
+    height: 100%;
+    background: #EEEEEE;
+    ion-button {
+      width: 50%;
+      margin: 0px;
+      --background: #F9942C;
+      --background-activated: #D7720A;
+      height: 50px;
+    }
+    .sent {
+      --border-radius: 0 10px 10px 0;
+    }
+    .received {
+      --border-radius: 10px 0 0 10px;
+    }
+    .record{
+      margin-top: 50px;
+      text-align: center;
+    }
+  }
+}

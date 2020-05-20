@@ -30,6 +30,8 @@ export class GiftsPage implements OnInit {
         // console.log(data);
       }
     )
+
+    // this.allService.receivedGifts
     // this.datePicker.show({
     //   date: new Date(),
     //   mode: 'date',
@@ -57,6 +59,8 @@ export class GiftsPage implements OnInit {
       this.allService.presentToast("Select Gift to Send");
       return;
     }
+
+    // if()
       
   }
 

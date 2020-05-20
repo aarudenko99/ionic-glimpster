@@ -245,11 +245,47 @@ export class AllService {
     )
   }
 
-  receivedGifts() {
-    
+  receivedGifts(giftInfo) {
+    return this.http.post(Url+'Profile/receivedGifts', giftInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
   }
 
-  // addPostCo
+  getBusinessCard(userInfo) {
+    return this.http.post(Url+'Profile/get_business_card', userInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
+  acceptedRequests(userInfo) {
+    return this.http.post(Url+'Profile/accepted_requests', userInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
+  pendingRequests(userInfo) {
+    return this.http.post(Url+'Profile/pending_requests', userInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
+  // addPostCo Profile/receivedGifts
 
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
