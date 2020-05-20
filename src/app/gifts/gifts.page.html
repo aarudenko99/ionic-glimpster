@@ -1,0 +1,63 @@
+<ion-header>
+  <img src="assets/imgs/top_image.png" class="top_image">
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Gifts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button class="received" (click)="onReceived()">Received</ion-button>
+        <ion-button class="sent" (click)="onSent()">Sent</ion-button>
+      </ion-col>
+      <div *ngIf="received" style="width: 100%;">
+
+      </div>
+
+      <div *ngIf="sent" style="width: 100%;">
+        <ion-col size="12">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Select Gift</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-radio-group >
+                <div *ngFor="let gift of gifts" size="12" class="wrap_gift">
+                  <div>
+                    <ion-img [src]="imageBaseUrl+gift.giftImage"></ion-img>
+                    <ion-label>{{gift.giftName}}</ion-label>
+                  </div>
+                  <div>
+                    <ion-radio slot="start" [value]="gift.id" (click)="radioChecked(gift.id)"></ion-radio>
+                  </div>
+                </div>
+              </ion-radio-group>
+            </ion-card-content>
+          </ion-card>
+
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Select Receiver</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <!-- <ion-label>Set Date & Time</ion-label> -->
+            <ion-datetime placeholder="Select Date"></ion-datetime>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12" class="wrap">
+          <ion-button class="send" (click)="sendGift()">SEND GIFT</ion-button>
+        </ion-col>
+      </div>
+    </ion-row>
+  </ion-grid>
+</ion-content>

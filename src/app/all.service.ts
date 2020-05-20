@@ -227,6 +227,28 @@ export class AllService {
     )
   }
 
+  getGifts() {
+    return this.http.get(Url+'Profile/gifts').pipe(
+      map(data => {
+        return data;
+      })
+    )
+  }
+
+  sendGift(giftInfo) {
+    return this.http.post(Url+'Profile/send_gift', giftInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
+  receivedGifts() {
+    
+  }
+
   // addPostCo
 
   async showLoader(){

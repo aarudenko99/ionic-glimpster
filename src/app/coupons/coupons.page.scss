@@ -14,3 +14,7 @@ ion-header {
     color: white;
   }
 }
+
+.header-md::after {
+  height: 0px !important;
+}
