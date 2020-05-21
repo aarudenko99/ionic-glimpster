@@ -89,6 +89,10 @@ const routes: Routes = [
   {
     path: 'gifts',
     loadChildren: () => import('./gifts/gifts.module').then( m => m.GiftsPageModule)
+  },
+  {
+    path: 'myprofiles',
+    loadChildren: () => import('./myprofiles/myprofiles.module').then( m => m.MyprofilesPageModule)
   }
 
 ];

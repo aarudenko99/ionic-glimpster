@@ -1,0 +1,43 @@
+<ion-header>
+  <img src="assets/imgs/top_image.png" class="top_image">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Profiles</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides pager="true">
+    <ion-slide class="Slide1 myslide">
+      <div>
+        <ion-label>Normal</ion-label>
+        <ion-icon name="pencil"></ion-icon>
+      </div>
+      <ion-img [src]="imageBaseUrl+avatar"></ion-img>
+    </ion-slide>
+    <ion-slide class="Slide2 myslide">
+      <ion-label>Bio</ion-label>
+      <ion-input placeholder="Bio Name" [(ngModel)]="bio.bio_name"></ion-input>
+      <ion-textarea placeholder="Bio" [(ngModel)]="bio.bio_text"></ion-textarea>
+      <ion-button (click)="updateBio()">UPDATE</ion-button>
+    </ion-slide>
+    <ion-slide class="Slide3 myslide">
+      <ion-label>Business</ion-label>
+      <ion-card>
+        <div>
+          <ion-img [src]="imageBaseUrl+avatar"></ion-img>
+        </div>
+        <div>
+          <ion-item><ion-input placeholder="First Name" [(ngModel)]="businessProfile.business_name"></ion-input></ion-item>
+          <ion-item><ion-input placeholder="Title" [(ngModel)]="businessProfile.title"></ion-input></ion-item>
+          <ion-item><ion-icon name="call"></ion-icon><ion-input placeholder="Phone" [(ngModel)]="businessProfile.user_phone"></ion-input></ion-item>
+          <ion-item><ion-icon name="mail"></ion-icon><ion-input placeholder="Email" [(ngModel)]="businessProfile.business_email"></ion-input></ion-item>
+          <ion-item><ion-icon name="laptop"></ion-icon><ion-input placeholder="Company Name" [(ngModel)]="businessProfile.company_name"></ion-input></ion-item>
+        </div>
+      </ion-card>
+      <ion-button (click)="updateBusiness()">UPDATE</ion-button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

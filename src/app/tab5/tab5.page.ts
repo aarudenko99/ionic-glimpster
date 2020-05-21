@@ -199,25 +199,42 @@ export class Tab5Page implements OnInit {
   
 
   updateStoredImages(name) {
-    // this.storage.set();
-    // this.storage.get('user').then(
-    //   userinfo => {
+    this.storage.get('user').then(images => {
+      let arr = JSON.parse(images);
+      if (!arr) {
+          let newImages = [name];
+          this.storage.set('user', JSON.stringify(newImages));
+      } else {
+          arr.push(name);
+          this.storage.set('user', JSON.stringify(arr));
+      }
 
-    //   }
-    // );
-    let filePath = this.file.dataDirectory + name;
-    let resPath = this.pathForImage(filePath);
+      let filePath = this.file.dataDirectory + name;
+      let resPath = this.pathForImage(filePath);
 
-    let newEntry = {
-      name: name,
-      path: resPath,
-      filePath: filePath
-    };
+      let newEntry = {
+          name: name,
+          path: resPath,
+          filePath: filePath
+      };
 
-    this.images = [newEntry, ...this.images];
-    // this.UploadImage(this.user);
-    // console.log(this.images);
-    this.ref.detectChanges(); // trigger change detection cycle
+      this.images = [newEntry, ...this.images];
+      this.ref.detectChanges(); // trigger change detection cycle
+    });
+
+    // let filePath = this.file.dataDirectory + name;
+    // let resPath = this.pathForImage(filePath);
+
+    // let newEntry = {
+    //   name: name,
+    //   path: resPath,
+    //   filePath: filePath
+    // };
+
+    // this.images = [newEntry, ...this.images];
+    // // this.UploadImage(this.user);
+    // // console.log(this.images);
+    // this.ref.detectChanges(); // trigger change detection cycle
   }
 
   pathForImage(img) {
@@ -229,66 +246,28 @@ export class Tab5Page implements OnInit {
     }
   }
 
-  // UploadImage(user) {
-  //   // this.allService.showLoader('uploading...')
-  //   if (this.images.length > 0) {
-
-  //     // let _mime_type = 'image/jpeg'
-
-  //     // let smext = this.images[0].name.split('.').pop();
-  //     // let ext = smext.toLowerCase();
-
-  //     // if (ext == 'png') {
-  //     //   _mime_type = 'image/png';
-  //     // }
-
-  //     // if (ext == 'jpeg') {
-  //     //   _mime_type = 'image/jpeg';
-  //     // }
-
-  //     // if (ext == 'mov') {
-  //     //   _mime_type = 'video/quicktime';
-  //     // }
-
-  //     // if (ext == 'mp4') {
-  //     //   _mime_type = 'video/mp4';
-  //     // }
-
-  //     // if (ext == 'jpg') {
-  //     //   _mime_type = 'image/jpeg';
-  //     // }
-
-  //     const fileTransfer: FileTransferObject = this.transfer.create();
-  //     let header: Headers = new Headers();
-  //     header.append('Authorization', 'Bearer ' + user.token);
-  //     let options: FileUploadOptions = {
-  //       fileKey: 'file',
-  //       fileName: user.user_id + '_featured.' + ext,
-  //       chunkedMode: false,
-  //       mimeType: _mime_type,
-  //       params: { 'type':this.type, 'user': user.user_id, 'ext': ext },
-  //       headers: { 'Authorization': 'Bearer ' + user.token }
-  //     }
-
-
-  //     let url = this.allService.getURL();
-  //     fileTransfer.upload(this.images[0].filePath, url + '/wp-json/wp/v2/media?token=' + user.token, options)
-  //       .then((data1) => {
-  //         console.log(data1)
-  //         this.allService.dismissLoading();
-  //         if(this.type=="trainerGallery"){
-  //          this. GetUserProfileImages(user.token);
-  //         }else{
-  //           this.GetUserImage();
-  //         }
-           
-  //         this.images = [];
-  //       }, (err) => {
-  //         console.log(err);
-  //         this.allService.dismissLoading();
-  //       });
-  //   }
-  // }
+  startUpload(imgEntry) {
+    this.file.resolveLocalFilesystemUrl(imgEntry.filePath)
+        .then(entry => {
+            ( < FileEntry > entry).file(file => this.readFile(file))
+        })
+        .catch(err => {
+            this.presentToast('Error while reading file.');
+        });
+  }
+ 
+  readFile(file: any) {
+      const reader = new FileReader();
+      reader.onload = () => {
+          const formData = new FormData();
+          const imgBlob = new Blob([reader.result], {
+              type: file.type
+          });
+          formData.append('file', imgBlob, file.name);
+          // this.uploadImageData(formData);
+      };
+      reader.readAsArrayBuffer(file);
+  }
  
   async presentToast(text) {
     const toast = await this.toastController.create({

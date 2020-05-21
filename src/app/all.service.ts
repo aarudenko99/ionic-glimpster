@@ -285,6 +285,46 @@ export class AllService {
     )
   }
 
+  getBio(userInfo) {
+    return this.http.post(Url+'Profile/get_bio', userInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
+  updateBio(bioInfo) {
+    return this.http.post(Url+'Profile/update_bio', bioInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
+  getBusinessProfile(userInfo) {
+    return this.http.post(Url+'Profile/get_business_profile', userInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
+  updateBusiness(businessInfo) {
+    return this.http.post(Url+'Profile/update_business', businessInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
   // addPostCo Profile/receivedGifts
 
   async showLoader(){
