@@ -93,6 +93,10 @@ const routes: Routes = [
   {
     path: 'myprofiles',
     loadChildren: () => import('./myprofiles/myprofiles.module').then( m => m.MyprofilesPageModule)
+  },
+  {
+    path: 'ads',
+    loadChildren: () => import('./ads/ads.module').then( m => m.AdsPageModule)
   }
 
 ];

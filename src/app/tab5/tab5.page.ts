@@ -118,6 +118,7 @@ export class Tab5Page implements OnInit {
             if(data == '1') {
             }
             else {
+              this.router.navigate(['/ads']);
             }
           }
         }

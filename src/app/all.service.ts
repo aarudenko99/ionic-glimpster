@@ -335,6 +335,26 @@ export class AllService {
     )
   }
 
+  getAds(adsInfo) {
+    return this.http.post(Url+'Contest/get_banner_ads', adsInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
+  getPoints(pointsInfo) {
+    return this.http.post(Url+'Api/points', pointsInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
       message: 'please wait',
