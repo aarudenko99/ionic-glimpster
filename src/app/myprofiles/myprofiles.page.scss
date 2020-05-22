@@ -15,6 +15,10 @@ ion-header {
   }
 }
 
+.header-md::after {
+  height: 0px !important;
+}
+
 ion-content {
   ion-slides {
     height: 100%;
@@ -30,7 +34,6 @@ ion-content {
         margin-right: 10px;
       }
       ion-label {
-        // color: white;
         font-weight: bold;
       }
       ion-img {
@@ -38,7 +41,6 @@ ion-content {
       }
       ion-input, ion-textarea {
         width: 80%;
-        // height: 60%;
         margin: 30px auto;
         border: 1px solid #F9942C;
         border-radius: 5px;

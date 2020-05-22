@@ -32,7 +32,6 @@ export class ProfilePage implements OnInit {
         this.userId = userinfo.user_id;
         this.userName = userinfo['user_info'].username;
         this.mobileNumber = userinfo['user_info'].phone;
-        // console.log(userinfo);
       }
     )
   }
@@ -61,14 +60,12 @@ export class ProfilePage implements OnInit {
   }
 
   updateProfile() {
-    // let body = new FormData();
     this.body.append('user_id', this.userId);
     this.body.append('phone', this.mobileNumber);
     this.body.append('username', this.userName);
     this.allService.updateUserInfo(this.body).subscribe(
       data => {
         if(data['success'] == 1) {
-          // console.log(data['message']);
           this.userInfo['user_info'].username = this.userName;
           this.userInfo['user_info'].phone = this.mobileNumber;
           this.storage.set('user', this.userInfo);

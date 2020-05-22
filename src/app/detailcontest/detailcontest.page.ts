@@ -23,14 +23,10 @@ export class DetailcontestPage implements OnInit {
     public route: ActivatedRoute
   ) { }
 
-  ngOnInit() {  
-    // this.allService.showLoader();
+  ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.detailContest = this.router.getCurrentNavigation().extras.state.detailContest;
-      // this.imageBaseUrl = this.router.getCurrentNavigation().extras.state.imageBaseUrl;
       this.renderData(this.detailContest);
-      // console.log(this.detailContest['id']);
-      // this.allService.dismissLoading();
     });
   }
 
@@ -42,7 +38,6 @@ export class DetailcontestPage implements OnInit {
       data => {
         if(data['success'] == 1) {
           this.otherContests = data['other_contest'];
-          console.log(data);
         }
       }
     )
@@ -55,9 +50,5 @@ export class DetailcontestPage implements OnInit {
   doJoin() {
     this.allService.presentToast("You have already joined this contest");
   }
-
-  // goContest(currentContest) {
-  //   console.log(currentContest);
-  // }
 
 }

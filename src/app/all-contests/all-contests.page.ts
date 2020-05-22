@@ -36,13 +36,6 @@ export class AllContestsPage implements OnInit {
           this.imageBaseUrl = this.allService.getImageBaseUrl();
           this.upcomingContest = data['upcoming_contest']
           this.pastContest = data['passed_contest'];
-          // this.navigationExtras = {
-          //   state: {
-          //     upcomingContest: this.upcomingContest,
-          //     pastContest: this.pastContest,
-          //     imageBaseUrl: this.imageBaseUrl
-          //   }
-          // };
           this.allService.dismissLoading();
         }
         else {
@@ -53,7 +46,6 @@ export class AllContestsPage implements OnInit {
       },
 
       err => {
-        console.log(err);
         this.allService.presentToast("Network error");
         this.allService.dismissLoading();
       }

@@ -31,7 +31,6 @@ export class PostdetailPage implements OnInit {
   ngOnInit() {
     this.stroage.get('user').then(
       userinfo => {
-        console.log(userinfo);
         this.username = userinfo['user_info'].username;
         this.userimage = userinfo['user_info'].image;
       }

@@ -18,3 +18,10 @@ ion-header {
 .header-md::after {
   height: 0px !important;
 }
+
+ion-content {
+  ion-grid {
+    background: #EEEEEE;
+    height: 100%;
+  }
+}

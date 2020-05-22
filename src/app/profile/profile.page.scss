@@ -17,9 +17,8 @@ ion-header {
 }
 
 ion-content {
-  // --background: url('../../assets/imgs/background.png');
-  // color: red;
   ion-grid {
+    background: #EEEEEE;
     padding: 80px 20px;
     .userimage {
       text-align: center;

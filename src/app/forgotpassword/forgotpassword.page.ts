@@ -48,13 +48,11 @@ export class ForgotpasswordPage implements OnInit {
   }
 
   requestPassword(passwordData) {
-    // console.log(passwordData);
     this.showLoader();
     const body = new FormData();
     body.append('email', passwordData.email);
 
     this.allService.requestPassword(body).subscribe(data=>{
-      // console.log('data', data);
       if(data) {
         data['id']
         const body1 = new FormData();
@@ -63,11 +61,9 @@ export class ForgotpasswordPage implements OnInit {
         this.allService.forgorPassword(body1).subscribe(data=>{
           if(data['success'] == 1) {
             this.presentToast("Password Changed");
-            // this.dismissLoading();
             this.router.navigate(['/login']);
           }
           else {
-            // this.dismissLoading();
             this.presentToast("Error while updating Product Please try again");
           }
         })
@@ -77,14 +73,7 @@ export class ForgotpasswordPage implements OnInit {
         this.forgotForm.reset();
       }
       this.dismissLoading();
-      // if(data['success'] == 1) {
-      // }
-      // else {
-      //   return;
-      // }
     },(err)=>{
-      console.log(err);
-      console.log("Error = ",err.error);
     })
   }
 

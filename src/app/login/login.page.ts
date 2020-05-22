@@ -44,7 +44,6 @@ export class LoginPage implements OnInit {
     this.showLoader();
 
     this.allService.doLogin(body).subscribe(data=>{
-      console.log('data', data);
       if(data['success'] == 1) {
         this.storage.set('user', data);
         this.dismissLoading();
@@ -56,34 +55,7 @@ export class LoginPage implements OnInit {
         return;
       }
     },(err)=>{
-      // this.dismissLoading();
-      console.log(err);
-      console.log("Error = ",err.error);
-      // this.errorMsg = 'User name or password invalid';
     })
-
-    // this.showLoader();
-
-    // this.allService.doLogin(loginData).subscribe(data=>{
-    //   this.dismissLoading();
-    //   let rs:any=[];
-    //   rs =data;
-    //   // console.log(" SUBSCRIBE  == ",rs);
-    //    if(rs.status='ok'){
-    //     this.storage.set('user', rs);
-    //     this.storage.set('user_profile', rs);
-        
-    //     this.events.publish('userCheck:created',rs);
-    //     this.loginForm.reset();
-    //     this.router.navigate(['/home']);
-
-    //    }
-    // },(err)=>{
-    //   this.dismissLoading();
-    //   console.log(err);
-    //   console.log("Error = ",err.error);
-    //   this.errorMsg = 'User name or password invalid';
-    // })
   }
 
   togglePassword(){

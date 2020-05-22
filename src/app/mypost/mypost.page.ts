@@ -15,7 +15,6 @@ export class MypostPage implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    // private navExtras: NavigationExtras
   ) { }
 
   ngOnInit() {
@@ -23,7 +22,6 @@ export class MypostPage implements OnInit {
       params => {
         this.userName = this.router.getCurrentNavigation().extras.state.userName;
         this.myPosts = this.router.getCurrentNavigation().extras.state.myPosts;
-        console.log(this.myPosts);
       }
     )
   }
@@ -39,8 +37,6 @@ export class MypostPage implements OnInit {
         media: activePost.media,
       }
     };
-    // this.navExtras.queryParams
-    console.log(activePost);
     this.router.navigate(['/postdetail'], navExtras);
   }
 

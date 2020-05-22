@@ -51,8 +51,6 @@ export class Tab2Page {
   }
 
   distanceBetween(locationInfo) {
-    // return "123";
-    // console.log(this.lng);
     let theta = this.lng - locationInfo.lng;
     let dist = Math.sin(this.deg2rad(locationInfo.lat)) * Math.sin(this.deg2rad(this.lat))
       + Math.cos(this.deg2rad(locationInfo.lat)) * Math.cos(this.deg2rad(this.lat)) * Math.cos(this.deg2rad(theta));
@@ -67,14 +65,3 @@ export class Tab2Page {
   }
 
 }
-
-// double theta = lon1 - lon2;
-//         double dist = Math.sin(deg2rad(lat1))
-//                 * Math.sin(deg2rad(lat2))
-//                 + Math.cos(deg2rad(lat1))
-//                 * Math.cos(deg2rad(lat2))
-//                 * Math.cos(deg2rad(theta));
-//         dist = Math.acos(dist);
-//         dist = dist * 180.0 / Math.PI;
-//         dist = dist * 60 * 1.1515 * 1000;
-//         return (dist);

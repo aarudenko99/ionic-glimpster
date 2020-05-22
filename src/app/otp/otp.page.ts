@@ -23,22 +23,15 @@ export class OtpPage implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      // console.log('my otp', params.otp);
-      // console.log('this', params.email);
       this.e_mail = params.email;
       this.local_otp = params.otp;
-      // console.log('that', params.signupData['email']);
     });
   }
 
   verify() {
     const body = new FormData();
-    // console.log('my otp', this.input_otp);
     this.route.queryParams.subscribe(params => {
-      console.log('my otp', this.input_otp);
       if(this.input_otp['title'] == this.local_otp) {
-
-        // if()
         body.append('email', params.email);
         body.append('name', params.username);
         body.append('phone', params.mobilenumber);
@@ -50,7 +43,6 @@ export class OtpPage implements OnInit {
         this.allService.verify(body).subscribe(
           data => {
             if(data['success'] == 1) {
-              console.log(data['userinfo']);
               this.router.navigate(['/login']);
             }
             else {
@@ -65,7 +57,6 @@ export class OtpPage implements OnInit {
         else this.presentToast("OTP not valid");
         return;
       }
-      // body.append('email', params.signupData.email);
     });
   }
 
@@ -74,7 +65,6 @@ export class OtpPage implements OnInit {
     body.append('email', this.e_mail);
     this.allService.doSignup(body).subscribe(
       data => {
-        console.log(data);
         if(data['success'] == 1) {
           this.local_otp = data['otp'];
           this.presentToast("One time password was sent. Please check mailbox.");

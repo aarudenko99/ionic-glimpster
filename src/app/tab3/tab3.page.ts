@@ -27,7 +27,6 @@ export class Tab3Page {
       return;
     }
     this.storage.get('user').then(userInfo => {
-      // console.log(this.postText, userInfo.user_id);
       this.body.append('user_id', userInfo.user_id);
       this.body.append('post_text', this.postText);
       this.allService.createPost(this.body).subscribe(
@@ -37,18 +36,9 @@ export class Tab3Page {
             this.router.navigate(['/tabs/tab1']).then(() => {
               window.location.reload();
             });
-            // console.log(data['message']);
           }
         }
       )
-      // this.body.append('user_id', userInfo.user_id);
-      // this.body.append('post_text', );
-      // this.body.append('ad_type', userInfo['user_info']);
-      // this.body.append('ad_value', );
-      // this.body.append('latitude', );
-      // this.body.append('longitude', );
-      // this.body.append('state', );
-      // this.body.append('country', );
     });
   }
 

@@ -21,14 +21,12 @@ export class ChangepasswordPage implements OnInit {
     this.storage.get('user').then(
       userinfo => {
         this.userId = userinfo['user_id'];
-        console.log(userinfo);
       }
     )
   }
 
   changePassword() {
     if(this.newPass != this.confirmPass) {
-      console.log(this.newPass.length);
       this.allService.presentToast("Passwords don't match");
       return;
     }
@@ -46,7 +44,6 @@ export class ChangepasswordPage implements OnInit {
     this.allService.forgorPassword(body).subscribe(
       data => {
         if(data['success'] == 1) {
-          console.log(data);
           this.allService.presentToast(data['message']);
         }
         else {

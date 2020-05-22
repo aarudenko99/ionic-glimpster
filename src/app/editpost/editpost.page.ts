@@ -24,7 +24,6 @@ export class EditpostPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.post = this.router.getCurrentNavigation().extras.state.editPost;
       this.updatedPost = this.post.post_text;
-      console.log("my---------", this.router.getCurrentNavigation().extras.state.editPost);
     });
   }
 
@@ -35,12 +34,10 @@ export class EditpostPage implements OnInit {
     this.allService.editPost(updateInfo).subscribe(
       data => {
         if(data['success'] == 1) {
-          console.log(data);
           this.router.navigate(['/tabs/tab1']);
         }
       }
     )
-    console.log();
   }
 
 }

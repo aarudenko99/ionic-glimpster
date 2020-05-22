@@ -51,7 +51,6 @@ export class MyprofilesPage implements OnInit {
 
         this.allService.getBusinessProfile(this.body).subscribe(
           data => {
-            console.log(data);
             this.businessProfile = data['business_profile'];
           }
         )

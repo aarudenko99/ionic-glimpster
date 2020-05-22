@@ -38,7 +38,6 @@ export class Tab1Page {
   ) {}
 
   ngOnInit() {
-    // this.allService.showLoader();
     this.storage.get('user').then(userInfo => {
       this.imageBaseUrl = this.allService.getImageBaseUrl();
       this.currentUser = userInfo.user_id;
@@ -52,7 +51,6 @@ export class Tab1Page {
         data => {
           if(data['success'] == 1) {
             this.posts = data['posts'];
-            // this.allService.dismissLoading();
           }
         }
       )
@@ -88,7 +86,6 @@ export class Tab1Page {
   }
 
   addComment(postId) {
-    console.log((<HTMLInputElement>document.getElementById("comment" + postId)).value);
     let commentInfo = new FormData();
     commentInfo.append('post_id', postId);
     commentInfo.append('user_id', `${this.currentUser}`);
@@ -192,7 +189,6 @@ export class Tab1Page {
             let filtered = this.posts.filter(function(item) {
               return item.id != cId
             })
-            console.log(filtered);
             this.posts = filtered;
             this.allService.deletePost(deleteInfo).subscribe(
               data => {
@@ -241,7 +237,6 @@ export class Tab1Page {
             if(data == 'edit') {
 
               const ind = this.posts.findIndex(x => x.id === this.activePostId)
-              console.log(this.posts[ind]);
     
               let navigationExtras: NavigationExtras = {
                 state: {

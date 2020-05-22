@@ -14,3 +14,14 @@ ion-header {
     color: white;
   }
 }
+
+.header-md::after {
+  height: 0px !important;
+}
+
+ion-content {
+  ion-grid {
+    height: 100%;
+    background: #EEEEEE;
+  }
+}

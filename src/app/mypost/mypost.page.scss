@@ -15,22 +15,25 @@ ion-header {
   }
 }
 
+.header-md::after {
+  height: 0px !important;
+}
+
 ion-content {
   ion-grid {
     margin-top: 50px;
     background: #EEEEEE;
     ion-col {
-      // min-width: 120px !important;
       background: white;
       min-width: 100px;
       min-height: 150px;
       align-items: center;
       display: flex;
-      // margin: 5px;
       div {
         margin: 0 auto;
         color: #F9942C;
       }
+      border: 5px solid #EEEEEE;
     }
   }
 }

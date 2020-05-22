@@ -25,20 +25,12 @@ export class BusinesscardPage implements OnInit {
   ngOnInit() {
     this.storage.get('user').then(
       userinfo => {
-        // console.log(userinfo);
         this.body.append('user_id', userinfo.user_id);
         this.allService.acceptedRequests(this.body).subscribe(
           data => {
             this.savedCard = data;
-            console.log(this.savedCard);
           }
         )
-        // this.allService.getBusinessCard(this.body).subscribe(
-        //   data => {
-        //     this.savedCard = data;
-        //     console.log(data);
-        //   }
-        // )
       }
     )
   }

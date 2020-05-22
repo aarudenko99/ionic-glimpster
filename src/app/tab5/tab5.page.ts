@@ -46,21 +46,15 @@ export class Tab5Page implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("tab5-----------");
     this.storage.get('user').then(
       userInfo => {
         this.userinfo = userInfo;
-        console.log(userInfo['user_info'].username);
-        // let body = new FormData();
         this.body.append('user_id', userInfo['user_id']);
         this.allService.getMyPosts(this.body).subscribe(
           data => {
-            // console.log(data);
             if(data['success'] == 1) {
               this.postsCount = data['posts'].length;
-              console.log(data['posts']);
               this.myPosts = data['posts'];
-              // this.router.navigate(['/mypost']);
             }
           }
         )
@@ -77,7 +71,6 @@ export class Tab5Page implements OnInit {
           data => {
             if(data['success'] == 1) {
               this.following = data['follwers'].length;
-              // console.log(data);
             }
           }
         )
@@ -123,11 +116,8 @@ export class Tab5Page implements OnInit {
           text: 'Ok',
           handler: (data) => {
             if(data == '1') {
-              console.log("1");
             }
             else {
-              // this.router.navigate(['/businesscard']);
-              console.log("2");
             }
           }
         }
@@ -236,7 +226,6 @@ export class Tab5Page implements OnInit {
   }
  
   readFile(file: any) {
-    // console.log("here success============");
       const reader = new FileReader();
       reader.onload = () => {
           const formData = new FormData();
@@ -247,7 +236,6 @@ export class Tab5Page implements OnInit {
           this.body.append('userfile', imgBlob);
           this.allService.updateUserImage(this.body).subscribe(
             data => {
-              console.log('imageuplad==========', data['message']);
             }
             
           )

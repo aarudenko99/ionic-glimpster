@@ -45,53 +45,19 @@ export class AllcommentPage implements OnInit {
             this.storage.get('user').then(
               userinfo=> {
                 this.loginUser = userinfo.user_id;
-                // console.log(userinfo.user_id);
               }
             )
           }
-          // else {
-          //   this.
-          // }
-          // console.log(data);
         }
       )
     })
   }
 
   editComment(id, comment) {
-    // console.log(id, " ", comment);
     this.activeComment = comment;
     this.commentId = id;
     this.editCommentAlert();
-    // this.allService.updatePostComment(commentInfo).subscribe(
-    //   data => {
-    //     console.log(data);
-    //   }
-    // )
   }
-
-  // async editCommentPrompt() {
-  //   const alert = await this.alertController.create({
-  //     header: '',
-  //     buttons: [
-  //       {
-  //         text: 'Cancel',
-  //         role: 'cancel',
-  //         cssClass: 'secondary',
-  //         handler: () => {
-  //           console.log('Confirm Cancel');
-  //         }
-  //       }, {
-  //         text: 'Ok',
-  //         handler: () => {
-  //           console.log('Confirm Ok');
-  //         }
-  //       }
-  //     ]
-  //   });
-
-  //   await alert.present();
-  // }
   
   async editPrompt() {
     let alert = await this.alertController.create({
@@ -107,13 +73,11 @@ export class AllcommentPage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           handler: data => {
-            // console.log('Cancel clicked');
           }
         },
         {
           text: 'Update',
           handler: data1 => {
-            // console.log(data.comment);
             let commentInfo = new FormData();
             commentInfo.append('id', this.commentId);
             commentInfo.append('comment', data1.comment);
@@ -124,7 +88,6 @@ export class AllcommentPage implements OnInit {
                   const ind = this.comments.findIndex(x => x.id === this.commentId)
                   this.comments[ind].comment = data1.comment;
                 }
-                // console.log(data);
               }
             )
           }
@@ -162,10 +125,6 @@ export class AllcommentPage implements OnInit {
           handler: (data) => {
             if(data == 'edit') {
               this.editPrompt();
-              // console.log("edit");
-              // this.reportAlertPrompt();
-              // this.router.navigate(['/report']);
-              // this
             }
             else {
               this.commentInfo.append('post_id', this.postId);
@@ -174,18 +133,14 @@ export class AllcommentPage implements OnInit {
                 data1 => {
                   this.presentToast(data1['message']);
                   if(data1['success'] == 1) {
-                    // const ind = this.comments.findIndex(x => x.id === this.commentId)
                     const cId = this.commentId;
                     let filtered = this.comments.filter(function(item) {
                       return item.id != cId;
                     })
                     this.comments = filtered;
-                    
-                    // this.comments[ind].comment = data1.comment;
                   }
                 }
               )
-              // console.log(this.postId, " ", this.commentId);
             }
           }
         }

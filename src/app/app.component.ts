@@ -26,7 +26,6 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      // this.router.navigate(['/tabs']);
 
       this.storage.get('user').then(userInfo => {
         if (userInfo) {
@@ -37,8 +36,6 @@ export class AppComponent {
       });
 
       this.splashScreen.hide();
-
-      // this.router.navigate(['/landing']);
     });
   }
 }
