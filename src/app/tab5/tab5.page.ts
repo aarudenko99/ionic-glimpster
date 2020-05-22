@@ -26,6 +26,7 @@ export class Tab5Page implements OnInit {
   followers = 0;
   following = 0;
   myPosts = [];
+  newImage = "";
 
   body = new FormData();
 
@@ -48,6 +49,8 @@ export class Tab5Page implements OnInit {
   ngOnInit() {
     this.storage.get('user').then(
       userInfo => {
+        console.log(userInfo.image);
+        // this.newImage = 
         this.userinfo = userInfo;
         this.body.append('user_id', userInfo['user_id']);
         this.allService.getMyPosts(this.body).subscribe(
@@ -194,6 +197,9 @@ export class Tab5Page implements OnInit {
 
   updateStoredImages(name) {
 
+      this.userinfo['image'] = name;
+      this.storage.set('user', this.userinfo);
+
       let filePath = this.file.dataDirectory + name;
       let resPath = this.pathForImage(filePath);
 
@@ -233,10 +239,16 @@ export class Tab5Page implements OnInit {
           const imgBlob = new Blob([reader.result], {
               type: file.type
           });
-          formData.append('file', imgBlob, file.name);
-          this.body.append('userfile', imgBlob);
+          this.body.append('userfile', imgBlob, file.name);
           this.allService.updateUserImage(this.body).subscribe(
             data => {
+              // console.log("Imageuploaded-------", data['message']);
+              this.presentToast(data['message']);
+              if(data['success'] == 1) {
+                this.newImage = data['newImage'];
+                this.userinfo['image'] = data['newImage'] + '.jpg';
+                this.storage.set('user', this.userinfo);
+              }
             }
             
           )

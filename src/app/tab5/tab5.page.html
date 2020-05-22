@@ -14,7 +14,7 @@
           <img [src]="userinfo.image ? imageBaseUrl+userinfo.image : placeholderImage" (click)="updateAvatar()"/>
         </div>
       </ion-col>
-
+      {{newImage}}
       <ion-col size="12" class="statistic">
         <ion-col size="4" (click)="getMyPosts()">
           <div>{{postsCount}}</div>

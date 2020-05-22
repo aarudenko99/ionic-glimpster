@@ -18,6 +18,7 @@ ion-header {
 
 ion-content {
   ion-grid {
+    height: 100%;
     background: #EEEEEE;
     margin: 150px 5px 5px 5px;
     .userimage {
@@ -25,6 +26,7 @@ ion-content {
       img {
         margin: 0 auto;
         width: 150px;
+        height: 150px;
         border-radius: 50%;
         /* overflow: hidden; */
         border: 1px solid;

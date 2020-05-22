@@ -46,6 +46,7 @@ export class LoginPage implements OnInit {
     this.allService.doLogin(body).subscribe(data=>{
       if(data['success'] == 1) {
         this.storage.set('user', data);
+        console.log(data);
         this.dismissLoading();
         this.router.navigate(['/tabs']);
       }
