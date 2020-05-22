@@ -38,6 +38,7 @@ export class Tab1Page {
   ) {}
 
   ngOnInit() {
+    // this.allService.showLoader();
     this.storage.get('user').then(userInfo => {
       this.imageBaseUrl = this.allService.getImageBaseUrl();
       this.currentUser = userInfo.user_id;
@@ -51,6 +52,7 @@ export class Tab1Page {
         data => {
           if(data['success'] == 1) {
             this.posts = data['posts'];
+            // this.allService.dismissLoading();
           }
         }
       )

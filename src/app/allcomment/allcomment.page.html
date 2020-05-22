@@ -10,7 +10,9 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row *ngIf="loginUser == ''">Comments Not Found</ion-row>
+    <ion-row *ngIf="loginUser == ''">
+      <p>Comments Not Found</p>
+    </ion-row>
     <ion-row *ngFor="let comment of comments">
       <ion-col size="12">
         <div class="user_info">
