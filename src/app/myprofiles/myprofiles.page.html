@@ -27,7 +27,7 @@
       <ion-label>Business</ion-label>
       <ion-card>
         <div>
-          <ion-img [src]="imageBaseUrl+avatar"></ion-img>
+          <ion-img [src]="imageBaseUrl+avatar" (click)="selectImage()"></ion-img>
         </div>
         <div>
           <ion-item><ion-input placeholder="First Name" [(ngModel)]="businessProfile.business_name"></ion-input></ion-item>

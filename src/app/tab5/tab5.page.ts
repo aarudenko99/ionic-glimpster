@@ -27,6 +27,8 @@ export class Tab5Page implements OnInit {
   following = 0;
   myPosts = [];
 
+  body = new FormData();
+
   constructor(
     private camera: Camera,
     private file: File,
@@ -44,13 +46,14 @@ export class Tab5Page implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("tab5-----------");
     this.storage.get('user').then(
       userInfo => {
         this.userinfo = userInfo;
         console.log(userInfo['user_info'].username);
-        let body = new FormData();
-        body.append('user_id', userInfo['user_id']);
-        this.allService.getMyPosts(body).subscribe(
+        // let body = new FormData();
+        this.body.append('user_id', userInfo['user_id']);
+        this.allService.getMyPosts(this.body).subscribe(
           data => {
             // console.log(data);
             if(data['success'] == 1) {
@@ -62,7 +65,7 @@ export class Tab5Page implements OnInit {
           }
         )
 
-        this.allService.getFollowers(body).subscribe(
+        this.allService.getFollowers(this.body).subscribe(
           data => {
             if(data['success'] == 1) {
               this.followers = data['follwers'].length;
@@ -70,7 +73,7 @@ export class Tab5Page implements OnInit {
           }
         )
 
-        this.allService.getFollowing(body).subscribe(
+        this.allService.getFollowing(this.body).subscribe(
           data => {
             if(data['success'] == 1) {
               this.following = data['follwers'].length;
@@ -199,15 +202,6 @@ export class Tab5Page implements OnInit {
   
 
   updateStoredImages(name) {
-    this.storage.get('user').then(images => {
-      let arr = JSON.parse(images);
-      if (!arr) {
-          let newImages = [name];
-          this.storage.set('user', JSON.stringify(newImages));
-      } else {
-          arr.push(name);
-          this.storage.set('user', JSON.stringify(arr));
-      }
 
       let filePath = this.file.dataDirectory + name;
       let resPath = this.pathForImage(filePath);
@@ -217,24 +211,9 @@ export class Tab5Page implements OnInit {
           path: resPath,
           filePath: filePath
       };
-
-      this.images = [newEntry, ...this.images];
+      
       this.ref.detectChanges(); // trigger change detection cycle
-    });
-
-    // let filePath = this.file.dataDirectory + name;
-    // let resPath = this.pathForImage(filePath);
-
-    // let newEntry = {
-    //   name: name,
-    //   path: resPath,
-    //   filePath: filePath
-    // };
-
-    // this.images = [newEntry, ...this.images];
-    // // this.UploadImage(this.user);
-    // // console.log(this.images);
-    // this.ref.detectChanges(); // trigger change detection cycle
+      this.startUpload(newEntry);
   }
 
   pathForImage(img) {
@@ -257,6 +236,7 @@ export class Tab5Page implements OnInit {
   }
  
   readFile(file: any) {
+    // console.log("here success============");
       const reader = new FileReader();
       reader.onload = () => {
           const formData = new FormData();
@@ -264,7 +244,13 @@ export class Tab5Page implements OnInit {
               type: file.type
           });
           formData.append('file', imgBlob, file.name);
-          // this.uploadImageData(formData);
+          this.body.append('userfile', imgBlob);
+          this.allService.updateUserImage(this.body).subscribe(
+            data => {
+              console.log('imageuplad==========', data['message']);
+            }
+            
+          )
       };
       reader.readAsArrayBuffer(file);
   }

@@ -1,5 +1,4 @@
 ion-header {
-  // display: flex;
   background-image: url('../../assets/imgs/top_image.png');
   height: 100px;
   margin-bottom: 50px;
@@ -36,6 +35,11 @@ ion-header {
   }
   .viewAll {
     float: right;
+  }
+  ion-img {
+    width: 100px;
+    border-radius: 50%;
+    overflow: hidden;
   }
 }
 

@@ -26,7 +26,7 @@ export class Tab1Page {
   activeUserId: number;
   activePostId: number;
   activePostText = "";
-  
+  avatarImage = "";
 
   constructor(
     private allService: AllService,
@@ -35,16 +35,13 @@ export class Tab1Page {
     private router: Router,
     private toastController: ToastController,
     private alertController: AlertController,
-    // private navigationExtras: NavigationExtras
   ) {}
 
   ngOnInit() {
-    
-    // this.showLoader();
-    console.log("Is this you again?");
     this.storage.get('user').then(userInfo => {
       this.imageBaseUrl = this.allService.getImageBaseUrl();
       this.currentUser = userInfo.user_id;
+      this.avatarImage = userInfo.image;
       this.lat = userInfo['user_info']['lat'];
       this.lng = userInfo['user_info']['lng'];
       this.body.append('user_id', userInfo.user_id);
@@ -54,7 +51,6 @@ export class Tab1Page {
         data => {
           if(data['success'] == 1) {
             this.posts = data['posts'];
-            console.log(this.posts);
           }
         }
       )
@@ -84,13 +80,9 @@ export class Tab1Page {
           const ind = this.posts.findIndex(x => x.id === postId)
           this.posts[ind].likes = `${Number(this.posts[ind].likes) + data['status']}`;
         }
-        // console.log("data", data);
       }
     )
-    // if(this.currentLikes > 0) this.likesClass = "heart";
-    // else this.likesClass = "heart-outline";
     this.likesFlag = !this.likesFlag;
-    // console.log(this.currentLikes);
   }
 
   addComment(postId) {
@@ -101,25 +93,18 @@ export class Tab1Page {
     commentInfo.append('comment', (<HTMLInputElement>document.getElementById("comment" + postId)).value);
 
     (<HTMLInputElement>document.getElementById("comment" + postId)).value = "";
-    // console.log(postId);
     
     this.allService.addPostComment(commentInfo).subscribe(
       data => {
-        // console.log("comment = ========", data);
         if(data['success'] == 1) {
           const ind = this.posts.findIndex(x => x.id === postId)
           this.posts[ind].comments = `${Number(this.posts[ind].comments) + 1}`;
-          // console.log(ind);
-          // console.log(this.posts[Number(postId)]);
-          // = `${Number(this.posts[postId].comments ) + 1}`;
         }
       }
     )
-    // console.log(this.comment, " ", userId);
   }
 
   editComment(userId, postId) {
-    
     let navigationExtras: NavigationExtras = {
       state: {
         userId: userId,
@@ -127,7 +112,6 @@ export class Tab1Page {
       }
     }
     this.router.navigate(['/allcomment'], navigationExtras);
-    // console.log(userId)
   }
 
   async showLoader(){
@@ -152,29 +136,6 @@ export class Tab1Page {
     });
     toast.present();
   }
-
-  // async presentAlertPrompt() {
-  //   const alert = await this.alertController.create({
-  //     header: 'Prompt!',
-  //     buttons: [
-  //       {
-  //         text: 'Cancel',
-  //         role: 'cancel',
-  //         cssClass: 'secondary',
-  //         handler: () => {
-  //           console.log('Confirm Cancel');
-  //         }
-  //       }, {
-  //         text: 'Ok',
-  //         handler: () => {
-  //           console.log('Confirm Ok');
-  //         }
-  //       }
-  //     ]
-  //   });
-
-  //   await alert.present();
-  // }
 
   async reportAlertPrompt() {
     const alert = await this.alertController.create({
@@ -225,15 +186,12 @@ export class Tab1Page {
             let deleteInfo = new FormData();
             deleteInfo.append('user_id', `${this.activeUserId}`);
             deleteInfo.append('post_id', `${this.activePostId}`);
-            // const ind = this.posts.findIndex(x => x.id === this.activePostId)
             let cId = this.activePostId
             let filtered = this.posts.filter(function(item) {
               return item.id != cId
             })
             console.log(filtered);
             this.posts = filtered;
-            // this.
-            // this.posts = this.posts.splice(ind,1);
             this.allService.deletePost(deleteInfo).subscribe(
               data => {
                 if(data['success'] == 1) {
@@ -289,19 +247,9 @@ export class Tab1Page {
                   imageBaseUrl: this.imageBaseUrl
                 }
               }
-              // this.activePostId
-              
-              // let navigationExtras: NavigationExtras = {
-              //   queryParams: {
-              //     postId: this.activePostId,
-              //     userId: this.activeUserId,
-              //     postText: this.activePostText
-              //   }
-              // };
               this.router.navigate(['/editpost'], navigationExtras);
             }
             else {
-              // this.router.navigate['/login'];
               this.deletePrompt();
             }
           }
@@ -340,8 +288,6 @@ export class Tab1Page {
           handler: (data) => {
             if(data == 'report') {
               this.reportAlertPrompt();
-              // this.router.navigate(['/report']);
-              this
             }
             else {
 

@@ -325,7 +325,15 @@ export class AllService {
     )
   }
 
-  // addPostCo Profile/receivedGifts
+  updateUserImage(imageInfo) {
+    return this.http.post(Url+'Api/update_user_image', imageInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
 
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
