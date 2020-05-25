@@ -13,6 +13,8 @@ import { File } from '@ionic-native/File/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -29,6 +31,7 @@ import { AppComponent } from './app.component';
     StatusBar,
     SplashScreen,
     NativeStorage,
+    SocialSharing,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     File,
     FilePath,

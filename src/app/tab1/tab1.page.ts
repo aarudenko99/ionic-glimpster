@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
 import { LoadingController, ToastController, AlertController } from '@ionic/angular';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { Storage } from '@ionic/storage';
 import { AllService } from '../all.service';
 
@@ -35,6 +36,7 @@ export class Tab1Page {
     private router: Router,
     private toastController: ToastController,
     private alertController: AlertController,
+    private socialSharing : SocialSharing
   ) {}
 
   ngOnInit() {
@@ -295,6 +297,20 @@ export class Tab1Page {
     });
 
     await alert.present();
+  }
+
+  sendShare(text, image) {
+    console.log('text--------', text);
+    console.log('image--------', image);
+    // this.socialSharing.shareViaEmail('aaa', 'aaa', ['aarudenko99@gmail.com']);
+    this.socialSharing.share(text, null, null, image);
+
+  //   this.socialSharing.shareViaEmail('Body', 'Subject', ['recipient@example.org']).then(() => {
+  //     // Success!
+  //   }).catch(() => {
+  //     // Error!
+  //   });
+  // }
   }
 
 }
