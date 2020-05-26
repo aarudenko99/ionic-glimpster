@@ -19,11 +19,8 @@
       <ion-col size="12" *ngIf="glimpsters" class="record">
         <ion-card *ngFor="let otheruser of otherusers">
           <div>
-            <ion-img [src]="otheruser.image == '' ? placeholderImage : imageBaseUrl+otheruser.image">
-
-            </ion-img>
+            <ion-img [src]="otheruser.image == '' ? placeholderImage : imageBaseUrl+otheruser.image"></ion-img>
           </div>
-          <!-- <div style="background-image: url('http://1.gravatar.com/avatar/1aedb8d9dc4751e229a335e371db8058?s=96&d=mm&r=g');"></div> -->
           <ion-label>{{otheruser.username}}</ion-label>
         </ion-card>
       </ion-col>
