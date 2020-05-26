@@ -299,11 +299,23 @@ export class Tab1Page {
     await alert.present();
   }
 
-  sendShare(text, image) {
+  sendShare(text, type, media) {
+    let data = null;
     console.log('text--------', text);
-    console.log('image--------', image);
+    console.log('type--------', type);
+    
+    switch(type) {
+      case 'image':
+        data = this.imageBaseUrl + media;
+        break;
+      case 'video':
+        data = this.imageBaseUrl + 'video/' + media;
+        break;
+    }
+    console.log('media--------', data);
     // this.socialSharing.shareViaEmail('aaa', 'aaa', ['aarudenko99@gmail.com']);
-    this.socialSharing.share(text, null, null, image);
+    this.socialSharing.share(text, "Title", null, data);
+    // this.socialSharing.share(aaa,dfdf,dfdf,)
 
   //   this.socialSharing.shareViaEmail('Body', 'Subject', ['recipient@example.org']).then(() => {
   //     // Success!
