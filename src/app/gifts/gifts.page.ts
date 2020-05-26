@@ -20,6 +20,7 @@ export class GiftsPage implements OnInit {
   placeholderImage = "http://1.gravatar.com/avatar/1aedb8d9dc4751e229a335e371db8058?s=96&d=mm&r=g";
   body = new FormData();
   otherusers = [];
+  receivedGifts = [];
   sendTime : any;
   sendDate : any;
 
@@ -45,8 +46,18 @@ export class GiftsPage implements OnInit {
         data => {
           if(data['success'] == 1) {
             this.otherusers = data['users'];
-            console.log('other users--------', data['users']);
+            // console.log('other users--------', data['users']);
           }
+        }
+      )
+
+      this.allService.receivedGifts(this.body).subscribe(
+        data => {
+          if(data['success'] == 1) {
+            console.log("gift-details=====", data['gift_details']);
+            this.receivedGifts = data['gift_details'];
+          }
+            // console.log("gift-details=====", data['gift_details']);
         }
       )
     })

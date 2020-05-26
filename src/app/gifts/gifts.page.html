@@ -16,7 +16,19 @@
         <ion-button class="sent" (click)="onSent()">Sent</ion-button>
       </ion-col>
       <div *ngIf="received" style="width: 100%;">
-
+        <ion-card *ngFor="let gift of receivedGifts" class="received">
+          <ion-card-header>
+            <ion-label>Gift : </ion-label>
+            <ion-img [src]="imageBaseUrl + gift.giftImage"></ion-img>
+            <ion-label class="giftname">{{gift.giftName}}</ion-label>
+            <!-- <ion-label>{{gift.gift_date + " " + gift.gift_time}}</ion-label> -->
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label>From : </ion-label>
+            <ion-img [src]="imageBaseUrl + gift.sender_image"></ion-img>
+            <ion-label class="giftname">{{gift.username}}</ion-label>
+          </ion-card-content>
+        </ion-card>
       </div>
 
       <div *ngIf="sent" style="width: 100%;">

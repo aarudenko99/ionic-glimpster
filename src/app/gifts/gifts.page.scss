@@ -61,6 +61,38 @@ ion-content {
       padding: 20px;
     }
 
+    .received {
+      // font-weight: bold;
+      // font-size: 20px;
+      ion-card-header {
+        display: flex;
+        align-items: center;
+        ion-img {
+          width: 50px;
+          height: 50px;
+          margin-left: 20px;
+        }
+        .giftname {
+          margin-left: 20px;
+        }
+      }
+      ion-card-content {
+        display: flex;
+        align-items: center;
+        ion-img {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin-left: 20px;
+        }
+        .giftname {
+          margin-left: 20px;
+        }
+        // justify-content: ;
+      }
+    }
+
     .wrap {
       display: flex;
       justify-content: center;

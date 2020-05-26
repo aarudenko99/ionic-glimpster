@@ -245,8 +245,8 @@ export class AllService {
     )
   }
 
-  receivedGifts(giftInfo) {
-    return this.http.post(Url+'Profile/receivedGifts', giftInfo).pipe(
+  receivedGifts(userInfo) {
+    return this.http.post(Url+'Profile/receivedGifts', userInfo).pipe(
       map(
         data => {
           return data;
