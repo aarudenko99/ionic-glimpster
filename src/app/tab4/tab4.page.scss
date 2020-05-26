@@ -31,7 +31,7 @@ ion-header {
 ion-content {
   ion-grid {
     margin: 100px 5px 5px 5px;
-    height: 100%;
+    // height: 100%;
     background: #EEEEEE;
     ion-button {
       width: 50%;
@@ -49,6 +49,24 @@ ion-content {
     .record{
       margin-top: 50px;
       text-align: center;
+    }
+    ion-card {
+      display: flex;
+      align-items: center;
+      height: 80px;
+      ion-img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        overflow: hidden;
+        border-radius: 50%;
+        margin-left: 10px;
+      }
+      ion-label {
+        font-size: 15px;
+        margin-left: 10px;
+        font-weight: bold;
+      }
     }
   }
 }

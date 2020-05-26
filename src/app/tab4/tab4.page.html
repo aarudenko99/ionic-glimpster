@@ -10,14 +10,22 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        <ion-button class="received" >Friends</ion-button>
-        <ion-button class="sent" >Glimpsters</ion-button>
+        <ion-button class="received" (click)="onFriends()">Friends</ion-button>
+        <ion-button class="sent" (click)="onGlimpsters()">Glimpsters</ion-button>
       </ion-col>
-      <ion-col size="12" *ngIf="saved" class="record">
+      <ion-col size="12" *ngIf="friends" class="record">
         <ion-label>No Saved Business Card</ion-label>
       </ion-col>
-      <ion-col size="12" *ngIf="pending" class="record">
-        <ion-label>No Pending Request</ion-label>
+      <ion-col size="12" *ngIf="glimpsters" class="record">
+        <ion-card *ngFor="let otheruser of otherusers">
+          <div>
+            <ion-img [src]="otheruser.image == '' ? placeholderImage : imageBaseUrl+otheruser.image">
+
+            </ion-img>
+          </div>
+          <!-- <div style="background-image: url('http://1.gravatar.com/avatar/1aedb8d9dc4751e229a335e371db8058?s=96&d=mm&r=g');"></div> -->
+          <ion-label>{{otheruser.username}}</ion-label>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
