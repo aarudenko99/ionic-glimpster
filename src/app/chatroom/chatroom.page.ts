@@ -25,7 +25,7 @@ export class ChatroomPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.allService.showLoader();
+    // this.allService.showLoader();
     this.route.queryParams.subscribe(
       params => {
         this.chatInfo = this.router.getCurrentNavigation().extras.state.userInfo;
@@ -45,15 +45,17 @@ export class ChatroomPage implements OnInit {
         firebase.database().ref('firebase-chat/'+this.username+'/chats').on('value', resp => {
           this.chats = this.chats.concat(snapshotToArray(resp));
           this.chats.sort((a, b) => (a.sendDate > b.sendDate ? 1 : -1))
-          this.allService.dismissLoading();
+          // this.allService.dismissLoading();
         });
 
       }
     )
   }
   sendMessage(){
-    console.log(this.roomkey, " ", this.type, " ", this.username, " ", this.message);
+    
+    // console.log(this.roomkey, " ", this.type, " ", this.username, " ", this.message);
     let newData = firebase.database().ref('firebase-chat/'+this.roomkey+'/chats').push();
+    // this.chats = [];
     const cDate = new Date();
 
     newData.set({
@@ -64,10 +66,11 @@ export class ChatroomPage implements OnInit {
     });
     this.message = '';
 
-    firebase.database().ref('firebase-chat/'+this.username+'/chats').on('value', resp => {
-      this.chats = this.chats.concat(snapshotToArray(resp));
-      this.chats.sort((a, b) => (a.sendDate > b.sendDate ? 1 : -1))
-    });
+    // firebase.database().ref('firebase-chat/'+this.username+'/chats').on('value', resp => {
+    //   this.chats = this.chats.concat(snapshotToArray(resp));
+    //   this.chats.sort((a, b) => (a.sendDate > b.sendDate ? 1 : -1))
+    // });
+    // console.log(this.chats);
   }
 
 }
