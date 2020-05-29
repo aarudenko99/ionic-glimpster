@@ -53,6 +53,7 @@ export class Tab1Page {
         data => {
           if(data['success'] == 1) {
             this.posts = data['posts'];
+            console.log(this.posts);
           }
         }
       )
@@ -313,16 +314,7 @@ export class Tab1Page {
         break;
     }
     console.log('media--------', data);
-    // this.socialSharing.shareViaEmail('aaa', 'aaa', ['aarudenko99@gmail.com']);
     this.socialSharing.share(text, "Title", null, data);
-    // this.socialSharing.share(aaa,dfdf,dfdf,)
-
-  //   this.socialSharing.shareViaEmail('Body', 'Subject', ['recipient@example.org']).then(() => {
-  //     // Success!
-  //   }).catch(() => {
-  //     // Error!
-  //   });
-  // }
   }
 
 }

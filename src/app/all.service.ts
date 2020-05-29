@@ -355,6 +355,16 @@ export class AllService {
     )
   }
 
+  getChatFriends(userInfo) {
+    return this.http.post(Url+'Follow/chat_friends', userInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
       message: 'please wait',

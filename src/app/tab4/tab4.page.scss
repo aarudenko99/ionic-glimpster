@@ -21,6 +21,7 @@ ion-header {
       margin: 40px 0 0 10px;
   }
   ion-title {
+    margin-top: 25px;
     color: white;
   }
 }
@@ -64,6 +65,7 @@ ion-content {
       }
       ion-label {
         font-size: 15px;
+        color: #F9942C;
         margin-left: 10px;
         font-weight: bold;
       }

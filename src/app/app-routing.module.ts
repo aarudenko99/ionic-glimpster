@@ -97,6 +97,10 @@ const routes: Routes = [
   {
     path: 'ads',
     loadChildren: () => import('./ads/ads.module').then( m => m.AdsPageModule)
+  },
+  {
+    path: 'chatroom',
+    loadChildren: () => import('./chatroom/chatroom.module').then( m => m.ChatroomPageModule)
   }
 
 ];

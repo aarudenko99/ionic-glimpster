@@ -2,7 +2,7 @@
   <img src="assets/imgs/top_image.png" class="top_image">
   <div class="header">
     <ion-title>Chat</ion-title>
-    <ion-icon name="add-outline" routerLink="/selectfriends"></ion-icon>
+    <!-- <ion-icon name="add-outline" routerLink="/selectfriends"></ion-icon> -->
   </div>
 </ion-header>
 
@@ -14,10 +14,10 @@
         <ion-button class="sent" (click)="onGlimpsters()">Glimpsters</ion-button>
       </ion-col>
       <ion-col size="12" *ngIf="friends" class="record">
-        <ion-label>No Saved Business Card</ion-label>
+        <ion-label>No Chats Found</ion-label>
       </ion-col>
       <ion-col size="12" *ngIf="glimpsters" class="record">
-        <ion-card *ngFor="let otheruser of otherusers">
+        <ion-card *ngFor="let otheruser of otherusers" (click)="goChatRoom(otheruser)">
           <div>
             <ion-img [src]="otheruser.image == '' ? placeholderImage : imageBaseUrl+otheruser.image"></ion-img>
           </div>
