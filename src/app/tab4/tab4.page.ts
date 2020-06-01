@@ -29,6 +29,7 @@ export class Tab4Page implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.storage.set('flag', true);
     this.storage.get('user').then(userInfo => {
       this.body.append('user_id', userInfo.user_id);
       this.currentId = userInfo.user_id;
@@ -61,7 +62,8 @@ export class Tab4Page implements OnInit {
     let navExtra : NavigationExtras = {
       state : {
         userInfo : chatUser,
-        currentId : this.currentId
+        currentId : this.currentId,
+        flag: false
       }
     }
     this.router.navigate(['/chatroom'], navExtra);

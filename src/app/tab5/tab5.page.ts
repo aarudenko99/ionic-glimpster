@@ -49,7 +49,6 @@ export class Tab5Page implements OnInit {
   ngOnInit() {
     this.storage.get('user').then(
       userInfo => {
-        console.log(userInfo.image);
         // this.newImage = 
         this.userinfo = userInfo;
         this.body.append('user_id', userInfo['user_id']);

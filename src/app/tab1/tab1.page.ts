@@ -53,7 +53,7 @@ export class Tab1Page {
         data => {
           if(data['success'] == 1) {
             this.posts = data['posts'];
-            console.log(this.posts);
+            // console.log(this.posts);
           }
         }
       )
@@ -302,8 +302,6 @@ export class Tab1Page {
 
   sendShare(text, type, media) {
     let data = null;
-    console.log('text--------', text);
-    console.log('type--------', type);
     
     switch(type) {
       case 'image':
@@ -313,7 +311,6 @@ export class Tab1Page {
         data = this.imageBaseUrl + 'video/' + media;
         break;
     }
-    console.log('media--------', data);
     this.socialSharing.share(text, "Title", null, data);
   }
 

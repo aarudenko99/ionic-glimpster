@@ -18,6 +18,7 @@ ion-header {
 ion-content {
   ion-grid {
     margin-top: 50px;
+    overflow-y: scroll;
     .item-card {
       margin-top: 20px;
       // background: #EEEEEE;

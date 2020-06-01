@@ -16,6 +16,8 @@ export class ChatroomPage implements OnInit {
   type = "";
   message = "";
   chats = [];
+  temp = [];
+  flag = false;
 
   constructor(
     private router: Router,
@@ -30,32 +32,37 @@ export class ChatroomPage implements OnInit {
       params => {
         this.chatInfo = this.router.getCurrentNavigation().extras.state.userInfo;
         this.roomkey = this.router.getCurrentNavigation().extras.state.currentId;
-        // this.roomkey = this.chatInfo.id;
         this.username = this.chatInfo.id;
         this.type = 'message';
-
-        // console.log(this.chatInfo);
-        console.log(this.roomkey, " ", this.username, " ", );
-
-        firebase.database().ref('firebase-chat/'+this.roomkey+'/chats').on('value', resp => {
+        
+        firebase.database().ref('firebase-chat/'+this.roomkey+'/chats').orderByChild('username').equalTo(this.username).on('value', (resp) => {
           this.chats = [];
           this.chats = snapshotToArray(resp);
-        });
+        })
 
-        firebase.database().ref('firebase-chat/'+this.username+'/chats').on('value', resp => {
-          this.chats = this.chats.concat(snapshotToArray(resp));
-          this.chats.sort((a, b) => (a.sendDate > b.sendDate ? 1 : -1))
-          // this.allService.dismissLoading();
-        });
-
+        firebase.database().ref('firebase-chat/'+this.username+'/chats').orderByChild('username').equalTo(this.roomkey).on('value', (resp) => {
+          // let temp = [];
+          if(this.temp != []) {
+            
+        
+        firebase.database().ref('firebase-chat/'+this.roomkey+'/chats').orderByChild('username').equalTo(this.username).on('value', (resp) => {
+          this.chats = [];
+          this.chats = snapshotToArray(resp);
+          document.getElementById('your_div').scrollIntoView(false);
+        })
+          }
+          this.temp = snapshotToArray(resp);
+          this.chats = this.chats.concat(this.temp);
+          this.chats.sort((a, b) => (a.sendDate > b.sendDate ? 1 : -1));
+          console.log(this.temp);
+          document.getElementById('your_div').scrollIntoView(false);
+        })
       }
     )
   }
   sendMessage(){
-    
-    // console.log(this.roomkey, " ", this.type, " ", this.username, " ", this.message);
     let newData = firebase.database().ref('firebase-chat/'+this.roomkey+'/chats').push();
-    // this.chats = [];
+    this.chats = [];
     const cDate = new Date();
 
     newData.set({
@@ -65,12 +72,10 @@ export class ChatroomPage implements OnInit {
       sendDate:cDate.toUTCString()
     });
     this.message = '';
-
-    // firebase.database().ref('firebase-chat/'+this.username+'/chats').on('value', resp => {
-    //   this.chats = this.chats.concat(snapshotToArray(resp));
-    //   this.chats.sort((a, b) => (a.sendDate > b.sendDate ? 1 : -1))
-    // });
-    // console.log(this.chats);
+    this.chats = this.chats.concat(this.temp);
+    this.chats.sort((a, b) => (a.sendDate > b.sendDate ? 1 : -1));
+    document.getElementById('your_div').scrollIntoView(false);
+    this.message = '';
   }
 
 }
