@@ -365,6 +365,16 @@ export class AllService {
     )
   }
 
+  addFriends(friendsInfo) {
+    return this.http.post(Url+'Follow/follow_user', friendsInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
       message: 'please wait',

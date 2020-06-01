@@ -47,14 +47,52 @@ ion-content {
     .received {
       --border-radius: 10px 0 0 10px;
     }
-    .record{
+    .record {
       margin-top: 50px;
       text-align: center;
+      ion-icon {
+        font-size: 20px;
+        margin-left: auto;
+        margin-right: 10px;
+      }
     }
     ion-card {
       display: flex;
       align-items: center;
       height: 80px;
+      ion-img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        overflow: hidden;
+        border-radius: 50%;
+        margin-left: 10px;
+      }
+      ion-label {
+        font-size: 15px;
+        color: #F9942C;
+        margin-left: 10px;
+        font-weight: bold;
+      }
+    }
+
+    .friend {
+      align-items: center;
+      .subdiv {
+        display: flex;
+        background-color: white;
+        border: 1px solid #eeeeee;
+        border-radius: 15px;
+        overflow: hidden;
+        div {
+          height: 80px;
+          display: flex;
+          align-items: center;
+          ion-label {
+            font-size: 20px;
+          }
+        }
+      }
       ion-img {
         width: 60px;
         height: 60px;
