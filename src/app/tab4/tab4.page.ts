@@ -115,4 +115,8 @@ export class Tab4Page implements OnInit {
     // console.log(this.isFriend);
   }
 
+  removeTrash(friendinfo) {
+    this.isFriend[friendinfo] = false;
+  }
+
 }

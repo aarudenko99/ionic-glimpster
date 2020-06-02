@@ -79,23 +79,28 @@ ion-content {
     .friend {
       align-items: center;
       .subdiv {
-        display: flex;
         background-color: white;
         border: 1px solid #eeeeee;
         border-radius: 15px;
         overflow: hidden;
+        min-height: 200px;
         div {
-          height: 80px;
-          display: flex;
-          align-items: center;
           ion-label {
             font-size: 20px;
           }
+          div:nth-child(2) {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+          }
+        }
+        ion-icon {
+          margin-right: 5px;
         }
       }
       ion-img {
-        width: 60px;
-        height: 60px;
+        width: 140px;
+        height: 140px;
         object-fit: cover;
         overflow: hidden;
         border-radius: 50%;
@@ -104,7 +109,6 @@ ion-content {
       ion-label {
         font-size: 15px;
         color: #F9942C;
-        margin-left: 10px;
         font-weight: bold;
       }
     }

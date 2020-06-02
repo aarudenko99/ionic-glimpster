@@ -16,16 +16,19 @@
       <ion-col size="12" *ngIf="friends" class="record">
         <ion-label *ngIf="countFriend == 0 || isFriend.length == 0">No Friends Found</ion-label>
 
-        <div *ngIf="countFriend > 0" class="friend">
-          <div *ngFor="let otheruser of otherusers" class="subdiv">
-            <div *ngIf="isFriend[otheruser.id]">
+        <ion-row *ngIf="countFriend > 0" class="friend">
+          <ion-col size="6" *ngFor="let otheruser of otherusers" [class]="isFriend[otheruser.id] ? 'subdiv' : 'n-subdiv'">
+            <div *ngIf="isFriend[otheruser.id]" >
               <div (click)="goChatRoom(otheruser)">
                 <ion-img [src]="otheruser.image == '' ? placeholderImage : imageBaseUrl+otheruser.image"></ion-img>
               </div>
-              <ion-label>{{otheruser.username}}</ion-label>
+              <div>
+                <ion-label>{{otheruser.username}}</ion-label>
+                <ion-icon name="trash" (click)="removeTrash(otheruser.id)"></ion-icon>
+              </div>
             </div>
-          </div>
-        </div>
+          </ion-col>
+        </ion-row>
         
         <!-- <ion-card *ngFor="let otheruser of otherusers" *ngIf="otheruser.id == true">
           <div (click)="goChatRoom(otheruser)">
