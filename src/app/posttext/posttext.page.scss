@@ -1,0 +1,41 @@
+ion-header {
+  background-image: url('../../assets/imgs/top_image.png');
+  ion-title {
+    color: white;
+    margin-top: 40px;
+  }
+
+  ion-toolbar {
+      --background: transparent !important;
+  }
+
+  .post_create {
+    --background: #F9942C;
+    --background-activated: #D7720A;
+    color: #FFFFFF;
+    height: 50px;
+  }
+  .activeContest {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #EEEEEE;
+    margin-top: 90px;
+    ion-img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  .viewAll {
+    float: right;
+  }
+}
+
+ion-content {
+  ion-textarea {
+    height: 100%;
+    background: azure;
+  }
+  
+}

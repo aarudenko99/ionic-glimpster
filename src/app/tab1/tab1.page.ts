@@ -40,9 +40,13 @@ export class Tab1Page {
   ) {}
 
   ngOnInit() {
+  }
+  
+  ionViewWillEnter() {
     this.storage.get('user').then(userInfo => {
       this.imageBaseUrl = this.allService.getImageBaseUrl();
       this.currentUser = userInfo.user_id;
+      // console.log(this.currentUser);
       this.avatarImage = userInfo.image;
       this.lat = userInfo['user_info']['lat'];
       this.lng = userInfo['user_info']['lng'];
@@ -58,11 +62,13 @@ export class Tab1Page {
         }
       )
     })
+    
   }
 
   viewMore(userId, postId) {
     this.activePostId = postId;
     this.activeUserId = userId;
+    console.log(userId);
     if(userId == this.currentUser) {
       this.loginAlert();
     }

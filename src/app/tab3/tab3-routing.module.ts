@@ -6,6 +6,29 @@ const routes: Routes = [
   {
     path: '',
     component: Tab3Page,
+    children: [
+      {
+        path: 'posttext',
+        loadChildren: () => import('../posttext/posttext.module').then(m => m.PosttextPageModule)
+      },
+      {
+        path: 'postmedia',
+        loadChildren: () => import('../postmedia/postmedia.module').then(m => m.PostmediaPageModule)
+      },
+      // {
+      //   path: 'tab4',
+      //   loadChildren: () => import('../tab4/tab4.module').then(m => m.Tab4PageModule)
+      // },
+      // {
+      //   path: 'tab5',
+      //   loadChildren: () => import('../tab5/tab5.module').then(m => m.Tab5PageModule)
+      // },
+      {
+        path: '',
+        redirectTo: '/tabs/tab3/posttext',
+        pathMatch: 'full'
+      }
+    ]
   }
 ];
 

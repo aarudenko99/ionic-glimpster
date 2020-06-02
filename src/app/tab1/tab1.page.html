@@ -38,7 +38,7 @@
     </ion-col>
     <ion-col size="12" class="iconwrap">
       <div><ion-icon [name]="post.likes > 0 ? 'heart' : 'heart-outline'" (click)="changeLikes(post.id)"></ion-icon>{{post.likes}}</div>
-      <div><ion-icon name="mail" (click)="editComment(post.user_id, post.id)"></ion-icon><span>{{post.comments}}</span></div>
+      <div><ion-icon name="mail-outline" (click)="editComment(post.user_id, post.id)"></ion-icon><span>{{post.comments}}</span></div>
       <div>
         <ion-icon name="share-social" (click)="sendShare(post.post_text, post.post_type, post.media)"></ion-icon>
         <span>{{post.share_status}}</span>

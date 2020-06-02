@@ -101,7 +101,23 @@ const routes: Routes = [
   {
     path: 'chatroom',
     loadChildren: () => import('./chatroom/chatroom.module').then( m => m.ChatroomPageModule)
-  }
+  },
+  {
+    path: 'postmedia',
+    loadChildren: () => import('./postmedia/postmedia.module').then( m => m.PostmediaPageModule)
+  },
+  // {
+  //   path: 'tabs/tabs3/posttext',
+  //   loadChildren: () => import('./posttext/posttext.module').then( m => m.PosttextPageModule)
+  // },
+  // {
+  //   path: 'tabs/tabs3/postimage',
+  //   loadChildren: () => import('./postimage/postimage.module').then( m => m.PostimagePageModule)
+  // },
+  // {
+  //   path: 'tabs/tabs3/postvideo',
+  //   loadChildren: () => import('./postvideo/postvideo.module').then( m => m.PostvideoPageModule)
+  // }
 
 ];
 @NgModule({

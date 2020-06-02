@@ -375,6 +375,16 @@ export class AllService {
     )
   }
 
+  imageUpload(imageInfo) {
+    return this.http.post(Url+'Post/create_image_post', imageInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
       message: 'please wait',

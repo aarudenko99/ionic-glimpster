@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/Camera/ngx';
 import { ActionSheetController, ToastController, Platform, AlertController } from '@ionic/angular';
@@ -7,27 +7,22 @@ import { File, FileEntry } from '@ionic-native/File/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Storage } from '@ionic/storage';
 import { FilePath } from '@ionic-native/file-path/ngx';
-// import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 
 import { AllService } from '../all.service';
 
 @Component({
-  selector: 'app-tab5',
-  templateUrl: './tab5.page.html',
-  styleUrls: ['./tab5.page.scss'],
+  selector: 'app-postmedia',
+  templateUrl: './postmedia.page.html',
+  styleUrls: ['./postmedia.page.scss'],
 })
-export class Tab5Page implements OnInit {
+export class PostmediaPage implements OnInit {
   userinfo = [];
+  newImage = "";
+  body = new FormData();
+  newEntry : any;
+  postText = "";
   placeholderImage = "../../assets/imgs/1.png";
   imageBaseUrl = "http://glimpsters.betaplanets.com/MobileApp/uploads/";
-  images = [];
-  postsCount = 0;
-  followers = 0;
-  following = 0;
-  myPosts = [];
-  newImage = "";
-
-  body = new FormData();
 
   constructor(
     private camera: Camera,
@@ -42,94 +37,31 @@ export class Tab5Page implements OnInit {
     private allService: AllService,
     private router: Router,
     private alertController: AlertController
-    // private navigationExtras: NavigationExtras
   ) { }
 
   ngOnInit() {
     this.storage.get('user').then(
       userInfo => {
-        // this.newImage = 
-        this.userinfo = userInfo;
-        this.body.append('user_id', userInfo['user_id']);
-        this.allService.getMyPosts(this.body).subscribe(
-          data => {
-            if(data['success'] == 1) {
-              this.postsCount = data['posts'].length;
-              this.myPosts = data['posts'];
-            }
-          }
-        )
-
-        this.allService.getFollowers(this.body).subscribe(
-          data => {
-            if(data['success'] == 1) {
-              this.followers = data['follwers'].length;
-            }
-          }
-        )
-
-        this.allService.getFollowing(this.body).subscribe(
-          data => {
-            if(data['success'] == 1) {
-              this.following = data['follwers'].length;
-            }
-          }
-        )
+        console.log(userInfo);
+        this.body.append('user_id', userInfo.user_id);
       }
     )
   }
 
-  getMyPosts() {
-    let navigationExtras: NavigationExtras = {
-      state: {
-        userName: this.userinfo['user_info'].username,
-        myPosts: this.myPosts
-      }
+  createPost() {
+    // console.log("PPPPPPP");
+    if(this.newEntry == undefined) {
+      this.presentToast("Please upload image");
+      return;
     }
-
-    this.router.navigate(['/mypost'], navigationExtras);
+    if(this.postText == "") {
+      this.presentToast("Please enter post text");
+      return;
+    }
+    this.startUpload(this.newEntry);
   }
 
-  async pointAlert() {
-    const alert = await this.alertController.create({
-      header: '',
-      inputs: [
-        {
-          name: 'Select Points Type',
-          type: 'radio',
-          label: 'Select Points Type',
-          value: '1',
-          checked: true
-        },
-        {
-          name: 'Watch Ads',
-          type: 'radio',
-          label: 'Watch Ads',
-          value: '2'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-        }, {
-          text: 'Ok',
-          handler: (data) => {
-            if(data == '1') {
-            }
-            else {
-              this.router.navigate(['/ads']);
-            }
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-
-  async updateAvatar() {
+  async uploadImage() {
     const actionSheet = await this.actionSheetController.create({
         header: "Select Image source",
         buttons: [{
@@ -195,20 +127,20 @@ export class Tab5Page implements OnInit {
 
   updateStoredImages(name) {
 
-      this.userinfo['image'] = name;
-      this.storage.set('user', this.userinfo);
+      // this.userinfo['image'] = name;
+      // this.storage.set('user', this.userinfo);
 
       let filePath = this.file.dataDirectory + name;
       let resPath = this.pathForImage(filePath);
 
-      let newEntry = {
+      this.newEntry = {
           name: name,
           path: resPath,
           filePath: filePath
       };
       
       this.ref.detectChanges(); // trigger change detection cycle
-      this.startUpload(newEntry);
+      // this.startUpload(newEntry);
   }
 
   pathForImage(img) {
@@ -237,15 +169,16 @@ export class Tab5Page implements OnInit {
           const imgBlob = new Blob([reader.result], {
               type: file.type
           });
-          this.body.append('userfile', imgBlob, file.name);
-          this.allService.updateUserImage(this.body).subscribe(
+          this.body.append('image', imgBlob, file.name);
+          this.body.append('post_text', this.postText);
+          this.allService.imageUpload(this.body).subscribe(
             data => {
               // console.log("Imageuploaded-------", data['message']);
               this.presentToast(data['message']);
               if(data['success'] == 1) {
                 this.newImage = data['newImage'];
-                this.userinfo['image'] = data['newImage'] + '.jpg';
-                this.storage.set('user', this.userinfo);
+                // this.userinfo['image'] = data['newImage'] + '.jpg';
+                // this.storage.set('user', this.userinfo);
               }
             }
             
@@ -260,7 +193,7 @@ export class Tab5Page implements OnInit {
         position: 'bottom',
         duration: 3000
     });
+    toast.present();
   }
-
 
 }
