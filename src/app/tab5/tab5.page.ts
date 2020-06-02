@@ -19,7 +19,7 @@ import { AllService } from '../all.service';
 })
 export class Tab5Page implements OnInit {
   userinfo = [];
-  placeholderImage = "http://1.gravatar.com/avatar/1aedb8d9dc4751e229a335e371db8058?s=96&d=mm&r=g";
+  placeholderImage = "../../assets/imgs/1.png";
   imageBaseUrl = "http://glimpsters.betaplanets.com/MobileApp/uploads/";
   images = [];
   postsCount = 0;

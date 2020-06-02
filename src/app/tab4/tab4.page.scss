@@ -78,6 +78,9 @@ ion-content {
 
     .friend {
       align-items: center;
+      .n-subdiv {
+        display: none;
+      }
       .subdiv {
         background-color: white;
         border: 1px solid #eeeeee;
