@@ -106,10 +106,30 @@ const routes: Routes = [
     path: 'postmedia',
     loadChildren: () => import('./postmedia/postmedia.module').then( m => m.PostmediaPageModule)
   },
-  // {
-  //   path: 'tabs/tabs3/posttext',
-  //   loadChildren: () => import('./posttext/posttext.module').then( m => m.PosttextPageModule)
-  // },
+  {
+    path: 'postvideo',
+    loadChildren: () => import('./postvideo/postvideo.module').then( m => m.PostvideoPageModule)
+  },
+  {
+    path: 'contests',
+    loadChildren: () => import('./contests/contests.module').then( m => m.ContestsPageModule)
+  },
+  {
+    path: 'mycontests',
+    loadChildren: () => import('./mycontests/mycontests.module').then( m => m.MycontestsPageModule)
+  },
+  {
+    path: 'othercontests',
+    loadChildren: () => import('./othercontests/othercontests.module').then( m => m.OthercontestsPageModule)
+  },
+  {
+    path: 'contests/mycontests',
+    loadChildren: () => import('./mycontests/mycontests.module').then( m => m.MycontestsPageModule)
+  },
+  {
+    path: 'editcontest',
+    loadChildren: () => import('./editcontest/editcontest.module').then( m => m.EditcontestPageModule)
+  },
   // {
   //   path: 'tabs/tabs3/postimage',
   //   loadChildren: () => import('./postimage/postimage.module').then( m => m.PostimagePageModule)

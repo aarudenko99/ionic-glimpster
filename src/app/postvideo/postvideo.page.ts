@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'
 
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/Camera/ngx';
 import { ActionSheetController, ToastController, Platform, AlertController } from '@ionic/angular';
@@ -10,19 +10,22 @@ import { FilePath } from '@ionic-native/file-path/ngx';
 
 import { AllService } from '../all.service';
 
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const ALLOWED_MIME_TYPE = "video/mp4";
+
 @Component({
-  selector: 'app-postmedia',
-  templateUrl: './postmedia.page.html',
-  styleUrls: ['./postmedia.page.scss'],
+  selector: 'app-postvideo',
+  templateUrl: './postvideo.page.html',
+  styleUrls: ['./postvideo.page.scss'],
 })
-export class PostmediaPage implements OnInit {
+export class PostvideoPage implements OnInit {
   userinfo = [];
   newImage = "";
   body = new FormData();
   newEntry : any;
   postText = "";
   placeholderImage = "../../assets/imgs/1.png";
-  imageBaseUrl = "http://glimpsters.betaplanets.com/MobileApp/uploads/";
+  imageBaseUrl = "http://glimpsters.betaplanets.com/MobileApp/uploads/video";
 
   constructor(
     private camera: Camera,
@@ -49,7 +52,7 @@ export class PostmediaPage implements OnInit {
   createPost() {
     // console.log("PPPPPPP");
     if(this.newEntry == undefined) {
-      this.presentToast("Please upload image");
+      this.presentToast("Please upload video");
       return;
     }
     if(this.postText == "") {
@@ -59,9 +62,9 @@ export class PostmediaPage implements OnInit {
     this.startUpload(this.newEntry);
   }
 
-  async uploadImage() {
+  async uploadVideo() {
     const actionSheet = await this.actionSheetController.create({
-        header: "Select Image source",
+        header: "Select Video source",
         buttons: [{
                 text: 'Load from Library',
                 handler: () => {
@@ -85,10 +88,11 @@ export class PostmediaPage implements OnInit {
  
   takePicture(sourceType: PictureSourceType) {
       var options: CameraOptions = {
-          quality: 100,
+          // quality: 100,
           sourceType: sourceType,
-          saveToPhotoAlbum: false,
-          correctOrientation: true
+          // saveToPhotoAlbum: false,
+          // correctOrientation: true,
+          mediaType: this.camera.MediaType.VIDEO,
       };
   
       this.camera.getPicture(options).then(imagePath => {
@@ -108,9 +112,11 @@ export class PostmediaPage implements OnInit {
   
   }
   createFileName() {
+    
     var d = new Date(),
         n = d.getTime(),
-        newFileName = n + ".jpg";
+        newFileName = n + ".mp4";
+    alert(newFileName);
     return newFileName;
   }
   
@@ -127,10 +133,10 @@ export class PostmediaPage implements OnInit {
 
       // this.userinfo['image'] = name;
       // this.storage.set('user', this.userinfo);
-
+      
       let filePath = this.file.dataDirectory + name;
       let resPath = this.pathForImage(filePath);
-
+      alert(filePath);
       this.newEntry = {
           name: name,
           path: resPath,
@@ -151,6 +157,7 @@ export class PostmediaPage implements OnInit {
   }
 
   startUpload(imgEntry) {
+    this.allService.showLoader();
     this.file.resolveLocalFilesystemUrl(imgEntry.filePath)
         .then(entry => {
             ( < FileEntry > entry).file(file => this.readFile(file))
@@ -167,11 +174,12 @@ export class PostmediaPage implements OnInit {
           const imgBlob = new Blob([reader.result], {
               type: file.type
           });
-          this.body.append('image', imgBlob, file.name);
+          this.body.append('video', imgBlob, file.name);
           this.body.append('post_text', this.postText);
-          this.allService.imageUpload(this.body).subscribe(
+          this.allService.videoUpload(this.body).subscribe(
             data => {
               // console.log("Imageuploaded-------", data['message']);
+              this.allService.dismissLoading();
               this.presentToast(data['message']);
               if(data['success'] == 1) {
                 this.newImage = data['newImage'];

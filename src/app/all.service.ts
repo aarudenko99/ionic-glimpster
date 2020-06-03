@@ -385,6 +385,36 @@ export class AllService {
     )
   }
 
+  videoUpload(videoInfo) {
+    return this.http.post(Url+'Post/create_video_post', videoInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
+  getMyContests(userInfo) {
+    return this.http.post(Url+'Contest/get_user_contest', userInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
+  updateContest(contestInfo) {
+    return this.http.post(Url+'Contest/update_contest', contestInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
       message: 'please wait',

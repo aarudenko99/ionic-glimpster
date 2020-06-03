@@ -15,10 +15,10 @@ const routes: Routes = [
         path: 'postmedia',
         loadChildren: () => import('../postmedia/postmedia.module').then(m => m.PostmediaPageModule)
       },
-      // {
-      //   path: 'tab4',
-      //   loadChildren: () => import('../tab4/tab4.module').then(m => m.Tab4PageModule)
-      // },
+      {
+        path: 'postvideo',
+        loadChildren: () => import('../postvideo/postvideo.module').then(m => m.PostvideoPageModule)
+      },
       // {
       //   path: 'tab5',
       //   loadChildren: () => import('../tab5/tab5.module').then(m => m.Tab5PageModule)

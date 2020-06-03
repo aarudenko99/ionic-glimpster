@@ -1,0 +1,54 @@
+<ion-header>
+  <img src="assets/imgs/top_image.png" class="top_image">
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Edit Contest</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <div>
+          <video controls *ngIf="detailContest.media && detailContest.media.indexOf('mp4') != -1" class="titleImage">
+            <source [src]="imageBaseUrl + detailContest.media" type="video/mp4">
+          </video>
+          <ion-img *ngIf="detailContest.media && detailContest.media.indexOf('mp4') == -1" [src]="imageBaseUrl + detailContest.media"  class="titleImage" alt="yes"></ion-img>
+          <ion-img *ngIf="!detailContest.media" [src]="placeholderImage"  class="titleImage" alt="ok"></ion-img>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <div class="contestInfo">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <ion-label>Contest Name</ion-label>
+        </div>
+        <ion-input class="info1" [(ngModel)]="title" [placeholder]="detailContest.title"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <div class="contestInfo">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-label>Date</ion-label>
+        </div>
+        <!-- <ion-label class="info1">{{detailContest.start_date}}</ion-label> -->
+        <ion-datetime class="info1" [placeholder]="detailContest.start_date" displayFormat="MM-DD-YYYY" [(ngModel)]="startDate"></ion-datetime>
+        <ion-datetime class="info1" [placeholder]="detailContest.end_date" displayFormat="MM-DD-YYYY" [(ngModel)]="endDate"></ion-datetime>
+      </ion-col>
+      <ion-col size="12">
+        <div class="contestInfo">
+          <ion-icon name="time-outline"></ion-icon>
+          <ion-label>Time</ion-label>
+        </div>
+        <!-- <ion-label class="info1">{{detailContest.start_time}} till {{detailContest.end_time}}</ion-label> -->
+        <ion-datetime [placeholder]="detailContest.start_time" displayFormat="hh:mm A" [(ngModel)]="startTime"></ion-datetime>
+        <ion-datetime [placeholder]="detailContest.end_time" displayFormat="hh:mm A" [(ngModel)]="endTime"></ion-datetime>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button class="btn_update" (click)="updateContest(detailContest)">UPDATE</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
