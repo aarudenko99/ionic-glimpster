@@ -40,6 +40,7 @@ export class AddcontestPage implements OnInit {
     private ref: ChangeDetectorRef,
     private toastController: ToastController,
     private allService: AllService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -207,8 +208,9 @@ export class AddcontestPage implements OnInit {
           this.allService.createContest(this.body).subscribe(
             data => {
               // console.log("Imageuploaded-------", data['message']);
-              this.allService.presentToast('Here I am');
+              // this.allService.presentToast('Here I am');
               this.allService.presentToast(data['message']);
+              this.router.navigate(['/mycontests']);
               // if(data['success'] == 1) {
               //   this.newImage = data['newImage'];
               //   // this.userinfo['image'] = data['newImage'] + '.jpg';

@@ -12,8 +12,8 @@
 <ion-content>
   <ion-grid>
     <ion-button routerLink='/addcontest'>Add New Contest</ion-button>
-    <ion-card *ngFor="let myContest of myContests" class="contests" (click)="editContest(myContest)">
-      <div class="wrap_image">
+    <ion-card *ngFor="let myContest of myContests" class="contests" >
+      <div class="wrap_image" (click)="editContest(myContest)">
         <video width="100" height="100" controls *ngIf="myContest.media && myContest.media.indexOf('mp4') != -1">
           <source [src]="imageBaseUrl + myContest.media" type="video/mp4">
         </video>
@@ -23,6 +23,7 @@
       <div>
         <ion-label>{{myContest.title}}</ion-label>
         <ion-label>{{myContest.start_date + " at " + myContest.start_time + " (GMT)"}}</ion-label>
+        <ion-icon name="trash" (click)="deleteContest(myContest.id)"></ion-icon>
       </div>
     </ion-card>
   </ion-grid>

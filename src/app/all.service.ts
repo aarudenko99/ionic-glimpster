@@ -425,6 +425,16 @@ export class AllService {
     )
   }
 
+  deleteContest(contestInfo) {
+    return this.http.post(Url+'Contest/delete_contest', contestInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
       message: 'please wait',

@@ -25,17 +25,17 @@ export class MycontestsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
     this.storage.get('user').then(
       userinfo => {
-        this.body.append('user_id', '23');
+        this.body.append('user_id', userinfo.user_id);
         this.allService.getMyContests(this.body).subscribe(
           data => {
             if(data['success'] == 1) {
               console.log(data);
               this.myContests = data['contest'];
-            }
-            else {
-              // this.empty = data['']
             }
           }
         )
@@ -50,6 +50,16 @@ export class MycontestsPage implements OnInit {
       }
     }
     this.router.navigate(['/editcontest'], navigationExtra);
+  }
+  deleteContest(contestInfo) {
+    this.body.append('contest_id', contestInfo);
+    this.allService.deleteContest(this.body).subscribe(
+      data => {
+        this.allService.presentToast(data['message']);
+        const ind = this.myContests.findIndex(x => x.id === contestInfo);
+        this.myContests.splice(ind, 1);
+      }
+    )
   }
 
 }
