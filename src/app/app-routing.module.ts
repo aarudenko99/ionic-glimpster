@@ -130,6 +130,10 @@ const routes: Routes = [
     path: 'editcontest',
     loadChildren: () => import('./editcontest/editcontest.module').then( m => m.EditcontestPageModule)
   },
+  {
+    path: 'addcontest',
+    loadChildren: () => import('./addcontest/addcontest.module').then( m => m.AddcontestPageModule)
+  },
   // {
   //   path: 'tabs/tabs3/postimage',
   //   loadChildren: () => import('./postimage/postimage.module').then( m => m.PostimagePageModule)

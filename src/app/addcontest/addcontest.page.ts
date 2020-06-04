@@ -1,28 +1,33 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/Camera/ngx';
 import { ActionSheetController, ToastController, Platform } from '@ionic/angular';
 import { File, FileEntry } from '@ionic-native/File/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { Storage } from '@ionic/storage';
 import { FilePath } from '@ionic-native/file-path/ngx';
 
 import { AllService } from '../all.service';
 
 @Component({
-  selector: 'app-postmedia',
-  templateUrl: './postmedia.page.html',
-  styleUrls: ['./postmedia.page.scss'],
+  selector: 'app-addcontest',
+  templateUrl: './addcontest.page.html',
+  styleUrls: ['./addcontest.page.scss'],
 })
-export class PostmediaPage implements OnInit {
-  userinfo = [];
-  newImage = "";
+export class AddcontestPage implements OnInit {
+  userId = "";
   body = new FormData();
-  newEntry : any;
-  postText = "";
-  placeholderImage = "../../assets/imgs/1.png";
-  imageBaseUrl = "http://glimpsters.betaplanets.com/MobileApp/uploads/";
+  title = "";
+  startDate = "";
+  endDate = "";
+  startTime = "";
+  endTime = "";
+  points = "0";
+  views = "0";
+  amount = "0";
+  contestType = "free";
+  newEntry = {};
 
   constructor(
     private camera: Camera,
@@ -39,27 +44,55 @@ export class PostmediaPage implements OnInit {
 
   ngOnInit() {
     this.storage.get('user').then(
-      userInfo => {
-        console.log(userInfo);
-        this.body.append('user_id', userInfo.user_id);
+      userinfo => {
+        this.userId = userinfo.user_id;
+        this.body.append('user_id', this.userId);
+        console.log(this.userId);
       }
     )
   }
 
-  createPost() {
-    // console.log("PPPPPPP");
-    if(this.newEntry == undefined) {
-      this.presentToast("Please upload image");
+  addContest() {
+    // console.log(this.contestType);
+    
+    if(this.title == "") {
+      this.allService.presentToast("Please write the contest title.");
       return;
     }
-    if(this.postText == "") {
-      this.presentToast("Please enter post text");
+    if(this.startDate == "") {
+      this.allService.presentToast("Please select Start Date.");
       return;
     }
+    if(this.startTime == "") {
+      this.allService.presentToast("Please select Start Time.");
+      return;
+    }
+    if(this.endDate == "") {
+      this.allService.presentToast("Please select End Date.");
+      return;
+    }
+    if(this.endTime == "") {
+      this.allService.presentToast("Please select End Time.");
+      return;
+    }
+
+    this.body.append('title', this.title);
+    this.body.append('start_date', this.startDate.split("T")[0]);
+    this.body.append('start_time', this.startTime.split("T")[1]);
+    this.body.append('end_date', this.endDate.split("T")[0]);
+    this.body.append('end_time', this.endTime.split("T")[1]);
+    this.body.append('points', this.points);
+    this.body.append('views', this.views);
+    this.body.append('amount', this.amount);
+    this.body.append('isPointBased', "false");
+    this.body.append('isAdsBased', "false");
+    this.body.append('contestType', this.contestType);
+
+    console.log(this.title, " ", this.startDate, " ", this.startTime, " ", this.points, " ", this.views, " ", this.amount, " ", this.contestType);
     this.startUpload(this.newEntry);
   }
 
-  async uploadImage() {
+  async selectImage() {
     const actionSheet = await this.actionSheetController.create({
         header: "Select Image source",
         buttons: [{
@@ -118,7 +151,7 @@ export class PostmediaPage implements OnInit {
       this.file.copyFile(namePath, currentName, this.file.dataDirectory, newFileName).then(success => {
           this.updateStoredImages(newFileName);
       }, error => {
-          this.presentToast('Error while storing file.');
+          this.allService.presentToast('Error while storing file.');
       });
   }
   
@@ -138,6 +171,7 @@ export class PostmediaPage implements OnInit {
       };
       
       this.ref.detectChanges(); // trigger change detection cycle
+      this.allService.presentToast("Image selected");
       // this.startUpload(newEntry);
   }
 
@@ -156,7 +190,7 @@ export class PostmediaPage implements OnInit {
             ( < FileEntry > entry).file(file => this.readFile(file))
         })
         .catch(err => {
-            this.presentToast('Error while reading file.');
+            this.allService.presentToast('Error while reading file.');
         });
   }
  
@@ -167,31 +201,27 @@ export class PostmediaPage implements OnInit {
           const imgBlob = new Blob([reader.result], {
               type: file.type
           });
-          this.body.append('image', imgBlob, file.name);
-          this.body.append('post_text', this.postText);
-          this.allService.imageUpload(this.body).subscribe(
+          this.body.append('userfile', imgBlob, file.name);
+          // this.body.append('post_text', this.postText);
+          // this.allService.presentToast('Here I am');
+          this.allService.createContest(this.body).subscribe(
             data => {
               // console.log("Imageuploaded-------", data['message']);
-              this.presentToast(data['message']);
-              if(data['success'] == 1) {
-                this.newImage = data['newImage'];
-                // this.userinfo['image'] = data['newImage'] + '.jpg';
-                // this.storage.set('user', this.userinfo);
-              }
+              this.allService.presentToast('Here I am');
+              this.allService.presentToast(data['message']);
+              // if(data['success'] == 1) {
+              //   this.newImage = data['newImage'];
+              //   // this.userinfo['image'] = data['newImage'] + '.jpg';
+              //   // this.storage.set('user', this.userinfo);
+              // }
+            },
+            error => {
+              this.allService.presentToast('Here I am error');
             }
             
           )
       };
       reader.readAsArrayBuffer(file);
-  }
- 
-  async presentToast(text) {
-    const toast = await this.toastController.create({
-        message: text,
-        position: 'bottom',
-        duration: 3000
-    });
-    toast.present();
   }
 
 }

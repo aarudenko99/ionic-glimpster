@@ -415,6 +415,16 @@ export class AllService {
     )
   }
 
+  createContest(contestInfo) {
+    return this.http.post(Url+'Contest/create_contest', contestInfo).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
       message: 'please wait',

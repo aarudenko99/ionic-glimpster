@@ -1,0 +1,71 @@
+ion-header {
+  .top_image {
+      position: absolute;
+  }
+  ion-toolbar {
+      --background: transparent !important;
+  }
+  ion-back-button {
+      color: white;
+      margin: 40px 0 0 10px;
+  }
+  ion-title {
+    margin-top: 20px;
+    color: white;
+  }
+}
+
+ion-content {
+  ion-grid {    
+    margin: 100px 10px 10px 10px;
+    border-radius: 20px;
+    background-color: #eeeeee;
+
+    .contestInfo {
+      display: flex;
+      align-items: center;
+
+      ion-icon {
+        color: #F9942C;
+        font-size: 30px;
+        margin: 10px;
+      }
+      ion-label {
+        font-size: 15px;
+        font-weight: bold;
+      }
+    }
+
+    .info1 {
+      margin-left: 15px;
+      font-size: 15px;
+    }
+
+    .wrap_btn {
+      text-align: center;
+    }
+    ion-input {
+      border-bottom: 1px solid;
+      width: 90%; 
+    }
+
+
+    ion-button {
+      --background: #FF9F2F;
+      --background-activated: #D7720A;
+      --border-radius: 45px;
+      color: #FFFFFF;
+      height: 50px;
+      width: 100%;
+    }
+    .imageWrap {
+      overflow-x: scroll;
+      display: flex;
+      video, ion-img {
+        width: 100px;
+        height: 100px;
+        pointer-events: none;
+      }
+    }
+  }
+}

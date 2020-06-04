@@ -45,6 +45,16 @@ ion-content {
       }
     }
   }
+  
+  ion-button {
+    margin-top: 30px;
+    --background: #FF9F2F;
+    --background-activated: #D7720A;
+    --border-radius: 25px;
+    color: #FFFFFF;
+    height: 50px;
+    width: 100%;
+  }
   .upcoming {
     margin-top: 30px;
   }
