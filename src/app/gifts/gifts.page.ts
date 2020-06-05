@@ -23,6 +23,8 @@ export class GiftsPage implements OnInit {
   receivedGifts = [];
   sendTime : any;
   sendDate : any;
+  gift : string;
+  receiver : string;
 
   constructor(
     private allService: AllService,
@@ -113,4 +115,14 @@ export class GiftsPage implements OnInit {
     // console.log(id);
     this.selectedUser = id;
   }
+
+  giftSelect(event) {
+    // console.log(event.detail.value.id);
+    this.selectedGift = event.detail.value.id;
+  }
+  receiverSelect(event) {
+    this.selectedUser = event.detail.value.id;
+    // console.log(event.detail.value.id);
+  }
+
 }

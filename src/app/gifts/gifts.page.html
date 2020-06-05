@@ -38,7 +38,7 @@
               <ion-card-title>Select Gift</ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <ion-radio-group >
+              <!-- <ion-radio-group >
                 <div *ngFor="let gift of gifts" size="12" class="wrap_gift">
                   <div>
                     <ion-img [src]="imageBaseUrl+gift.giftImage"></ion-img>
@@ -48,7 +48,15 @@
                     <ion-radio slot="start" [value]="gift.id" (click)="radioChecked(gift.id)"></ion-radio>
                   </div>
                 </div>
-              </ion-radio-group>
+              </ion-radio-group> -->
+              <ion-select class="info1" placeholder="Gift" [(ngModel)]="gift" (ionChange)="giftSelect($event)">
+                <ion-select-option *ngFor="let gift of gifts" [value]="gift">
+                  <div>
+                    <ion-img [src]="imageBaseUrl+gift.giftImage"></ion-img>
+                    <ion-label>{{gift.giftName}}</ion-label>
+                  </div>
+                </ion-select-option>
+              </ion-select>
             </ion-card-content>
           </ion-card>
 
@@ -57,7 +65,7 @@
               <ion-card-title>Select Receiver</ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <ion-radio-group>
+              <!-- <ion-radio-group>
                 <div *ngFor="let otheruser of otherusers" class="receiver">
                   <div>
                     <div>
@@ -69,7 +77,13 @@
                     <ion-radio [value]="otheruser.id" (click)="radioChecked1(otheruser.id)" slot="start"></ion-radio>
                   </div>
                 </div>
-              </ion-radio-group>
+              </ion-radio-group> -->
+              <ion-select class="info1" placeholder="Receiver" [(ngModel)]="receiver" (ionChange)="receiverSelect($event)">
+                <ion-select-option *ngFor="let otheruser of otherusers" [value]="otheruser">
+                  <ion-img [src]="otheruser.image == '' ? placeholderImage : imageBaseUrl+otheruser.image"></ion-img>
+                  <ion-label>{{otheruser.username}}</ion-label>
+                </ion-select-option>
+              </ion-select>
             </ion-card-content>
           </ion-card>
         </ion-col>
