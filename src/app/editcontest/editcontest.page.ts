@@ -16,6 +16,10 @@ export class EditcontestPage implements OnInit {
   startTime = "";
   endTime = "";
   title = "";
+  points : string;
+  amount : string;
+  views : string;
+  // contestType : string;
   
   imageBaseUrl = "http://glimpsters.betaplanets.com/MobileApp/uploads/";
   placeholderImage = "../../assets/imgs/placeholder.png";
@@ -31,6 +35,15 @@ export class EditcontestPage implements OnInit {
       params => {
         this.detailContest = this.router.getCurrentNavigation().extras.state.myContest;
         console.log(this.detailContest);
+        // this.startDate = this.detailContest['start_date'];
+        // this.endDate = this.detailContest['end_date'];
+        // this.startTime = this.detailContest['start_time'];
+        // this.endTime = this.detailContest['end_time'];
+        this.title = this.detailContest['title'];
+        this.points = this.detailContest['points'];
+        this.amount = this.detailContest['amount'];
+        this.views = this.detailContest['views'];
+        // this.contestType = this.detailContest['contestType'];
       }
     )
     
@@ -40,9 +53,6 @@ export class EditcontestPage implements OnInit {
     // console.log("here I am ");
     // console.log(this.title, "\n", this.startDate.split("T")[0], "\n", this.endTime.split("T")[1]);
     this.body.append('contest_id', detailContest.id);
-
-    if(this.title == "") this.body.append('title', detailContest.title);
-    else this.body.append('title', this.title);
 
     if(this.startDate == "") this.body.append('start_date', detailContest.start_date);
     else this.body.append('start_date', this.startDate.split("T")[0]);
@@ -55,6 +65,13 @@ export class EditcontestPage implements OnInit {
 
     if(this.endTime == "") this.body.append('end_time', detailContest.end_time);
     else this.body.append('end_time', this.endTime.split("T")[1]);
+    console.log()
+
+    // this.body.append('contestType', this.contestType);
+    this.body.append('amount', this.amount);
+    this.body.append('views', this.views);
+    this.body.append('points', this.points);
+    this.body.append('title', this.title);
 
     this.allService.updateContest(this.body).subscribe(
       data => {

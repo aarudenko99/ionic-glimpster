@@ -46,6 +46,30 @@
         <ion-datetime [placeholder]="detailContest.end_time" displayFormat="hh:mm A" [(ngModel)]="endTime"></ion-datetime>
       </ion-col>
       <ion-col size="12">
+        <div class="contestInfo">
+          <ion-icon name="star-outline"></ion-icon>
+          <ion-label>Points</ion-label>
+        </div>
+        <!-- <ion-label class="info1">{{detailContest.start_time}} till {{detailContest.end_time}}</ion-label> -->
+        <ion-input class="info1" type="number" [(ngModel)]="points" ></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <div class="contestInfo">
+          <ion-icon name="bulb-outline"></ion-icon>
+          <ion-label>Amount</ion-label>
+        </div>
+        <!-- <ion-label class="info1">{{detailContest.start_time}} till {{detailContest.end_time}}</ion-label> -->
+        <ion-input class="info1" type="number" [(ngModel)]="amount" ></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <div class="contestInfo">
+          <ion-icon name="eye-outline"></ion-icon>
+          <ion-label>Views</ion-label>
+        </div>
+        <!-- <ion-label class="info1">{{detailContest.start_time}} till {{detailContest.end_time}}</ion-label> -->
+        <ion-input class="info1" type="number" [(ngModel)]="views" ></ion-input>
+      </ion-col>
+      <ion-col size="12">
         <ion-button class="btn_update" (click)="updateContest(detailContest)">UPDATE</ion-button>
       </ion-col>
     </ion-row>

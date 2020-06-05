@@ -61,6 +61,10 @@ ion-content {
     height: 50px;
     width: 100%;
   }
+  ion-input {
+    border-bottom: 1px solid;
+    width: 90%; 
+  }
   .imageWrap {
     overflow-x: scroll;
     display: flex;
