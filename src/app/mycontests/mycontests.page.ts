@@ -34,7 +34,7 @@ export class MycontestsPage implements OnInit {
         this.allService.getMyContests(this.body).subscribe(
           data => {
             if(data['success'] == 1) {
-              console.log(data);
+              // console.log(data);
               this.myContests = data['contest'];
             }
           }

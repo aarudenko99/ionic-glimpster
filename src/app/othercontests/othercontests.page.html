@@ -9,5 +9,24 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card *ngFor="let otherContest of otherContests" class="contests" (click)="joinContest(otherContest)">
+          <div class="wrap_image">
+            <video width="100" height="100" controls *ngIf="otherContest.media && otherContest.media.indexOf('mp4') != -1">
+              <source [src]="imageBaseUrl + otherContest.media" type="video/mp4">
+            </video>
+            <ion-img *ngIf="otherContest.media && (otherContest.media.indexOf('jpg') || otherContest.media.indexOf('png'))" [src]="imageBaseUrl + otherContest.media" alt="Past Image"></ion-img>
+            <ion-img *ngIf="!otherContest.media" [src]="placeholderImage" alt="PastImage"></ion-img>
+          </div>
+          <div>
+            <ion-label>{{otherContest.title}}</ion-label>
+            <ion-label>Hosted by : {{otherContest.username}}</ion-label>
+            <ion-label>{{otherContest.start_date + " at " + otherContest.start_time + " (GMT)"}}</ion-label>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -435,6 +435,16 @@ export class AllService {
     )
   }
 
+  joinContest(info) {
+    return this.http.post(Url+'Contest/contest_join', info).pipe(
+      map(
+        data => {
+          return data;
+        }
+      )
+    )
+  }
+
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
       message: 'please wait',
